@@ -1,0 +1,38 @@
+﻿input[type="radio"].css-checkbox {
+    display: none;
+}
+
+.css-label {
+    padding-left: 20px;
+    display: flex;
+    width: 30%;
+    height: 193px;
+    background-image: url(images/OrderStatus/DatLay.png);
+    background-repeat: no-repeat;
+    background-color: #e9eef4;
+    background-size: contain;
+}
+
+input[type="radio"].css-checkbox:checked + label.css-label {
+    background-position: 0 0;
+    border: 3px solid #2fbcdf;
+}
+input[type="radio"].css-checkbox1 {
+    display: none;
+}
+
+.css-label1 {
+    padding-left: 20px;
+    display: flex;
+    width: 30%;
+    height: 193px;
+    background-image: url(images/OrderStatus/DatGiaoHang.png);
+    background-repeat: no-repeat;
+    background-color: #e9eef4;
+    background-size: contain;
+}
+
+input[type="radio"].css-checkbox1:checked + label.css-label1 {
+    background-position: 0 0;
+    border: 3px solid #2fbcdf;
+}

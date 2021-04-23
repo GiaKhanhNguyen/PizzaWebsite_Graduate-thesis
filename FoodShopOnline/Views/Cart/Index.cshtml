@@ -1,0 +1,79 @@
+﻿@model List<FoodShopOnline.Models.CartItem>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    decimal total = 0;
+    int quantity = 0;
+}
+@section jsFooter{
+
+    <script src="~/content/client/controller/CartController.js"></script>
+}
+@*@foreach(var item in Model)
+{
+    quantity = item.Quantity + quantity;
+}
+
+<p>Giỏ Hàng: <span style="color:#d30e15"> @quantity sản phẩm
+    </span>
+    </p>
+<div class="hr"><hr></div>*@
+
+<div class="content" style="padding-right: 100px">
+    <div class="section group">
+        @if (Model.Count > 0)
+        {
+            <table class="table">
+                <thead>
+                    <tr>
+                        <td style="font-weight: bold; color: #d30e15">CHI TIẾT ĐƠN HÀNG</td>
+                        <td></td>
+                        <td></td>
+                        <td style="font-weight: bold; color: #d30e15">ĐƠN GIÁ</td>
+                        <td style="font-weight: bold; color: #d30e15">THÀNH TIỀN</td>
+                        <td></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            @*<td>@item.Product.ID</td>*@
+                            <td>@item.Product.Name</td>
+                            <td><img src="@item.Product.Image" width="100" /></td>
+                            <td><input type="text" class="txtQuantity" data-id="@item.Product.ID" value="@item.Quantity" /></td>
+                            @*<td><input type="checkbox" checked/> Dày</td>*@
+                            <td>@item.Product.Price.ToString("N0")</td>
+                            <td>@((item.Product.Price * item.Quantity).ToString("N0"))</td>
+                            <td><a href="#" class="btn-delete" data-id="@item.Product.ID"><i class="fas fa-trash-alt"></i></a></td>
+                        </tr>
+                        total = (item.Product.Price * item.Quantity) + total;
+                        quantity = item.Quantity + quantity;
+                    }
+                </tbody>
+            </table>
+            <br />
+            <br />
+            <div class="row">
+                <div style="margin-left: 870px">
+                    <h1>Tổng số lượng: <span style="color:#d30e15">@quantity </span></h1>
+                    <h1>Tổng Tiền: <span style="color:#d30e15">@total.ToString("N0")đ </span></h1>
+                </div>
+            </div>
+            <br />
+            <div style="margin-left: 40px">
+                <button id="btnContinue" class="btn-outline-primary" style="font-size: 17px"><i class="fas fa-arrow-left"></i> Tiếp tục mua hàng</button>
+                <button id="btnUpdate" class="btn-outline-primary" style="font-size: 17px"><i class="fas fa-pencil-alt"></i> Cập nhập số lượng</button>
+                <button id="btnDeleteAll" class="btn-outline-primary" style="font-size: 17px"><i class="fas fa-trash-alt"></i> Xóa giỏ hàng</button>
+                <button id="btnPayment" class="btn-outline-primary" style="font-size: 17px"><i class="fas fa-shipping-fast"></i> Đặt hàng</button>
+            </div>
+        }
+        else
+        {
+            <br />
+            <span class="alert alert-danger" style="font-size: 20px">Chưa có sản phẩm nào trong giỏ hàng</span>
+            <br />
+        }
+    </div>
+</div>

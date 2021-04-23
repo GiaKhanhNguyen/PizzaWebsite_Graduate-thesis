@@ -1,0 +1,12 @@
+﻿@model List<Model.EnityFramework.ProductCategory>
+
+
+@foreach (var item in Model)
+{
+    @*<a class="dropdown-item" href="@item.SeoTitile-@item.ID"><i class="@item.Icon"></i> @item.Name</a>*@
+    <a class="dropdown-item" href="/san-pham/@item.Alias-@item.ID"><i class="@item.Icon"></i> @item.Name</a>
+}
+
+@*<a class="dropdown-item" href="/Category/MonAnKem1_Category"><i class="fa fa-fw fa-utensils"></i> Món Ăn Kèm</a>
+    <a class="dropdown-item" href="/Category/MyY_Com_Category"><i class="fa fa-fw fa-utensils"></i> Mì Ý & Cơm</a>
+    <a class="dropdown-item" href="/Category/GiaiKhat"><i class="fas fa-wine-glass-alt"></i> Giải Khát</a>*@

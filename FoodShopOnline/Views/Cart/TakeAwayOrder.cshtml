@@ -1,0 +1,148 @@
+﻿
+@{
+    ViewBag.Title = "TakeAwayOrder";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section jsFooter{
+    <script src="~/content/client/controller/paymentController.js"></script>
+}
+<br />
+@using (Html.BeginForm("TakeAwayOrder", "Cart", FormMethod.Post))
+{
+    <section class="section-content padding-y">
+        <div class="card mx-auto" style="width: 100%; height: 100%">
+            <article class="card-body">
+                <div class="content">
+                    <center>
+                        <img src="/content/client/images/OrderStatus/3.png" />
+                        <br />
+                        <p>ĐIỀN THÔNG TIN ĐẶT HÀNG</p>
+                        <hr />
+                    </center>
+                    <br />
+                    <p class="form-group" style="margin-left: 50px; font-family: 'Times New Roman', Times, serif">
+                        Đặt đến lấy
+                    </p>
+                    <hr />
+                    <div class="content">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="col-md-6">
+                                    <p class="form-group" style="margin-left: 100px;font-size: 30px ;font-family: 'Times New Roman', Times, serif">
+                                        Thông tin nhận hàng
+                                    </p>
+                                    <div class="section group">
+
+                                        <div class="form-group">
+                                            <label class="fa fa-user" style="font-size: 15px; margin-right: 30px"> Họ Và Tên*</label>
+                                            <input name="CustomerName" type="text" class="form-group" style="font-size: 15px; width: 500px" required />
+                                        </div>
+                                        <div class="form-group">
+                                            <label style="font-size: 15px; margin-right: 26px" class="fas fa-phone"> Điện thoại*</label>
+                                            <input name="CustomerMobie" class="form-group" style="font-size: 15px; width: 500px" type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required placeholder="090-123-1234" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label style="font-size: 15px; margin-right: 55px" class="fas fa-envelope"> Email*</label>
+                                            <input name="CustomerEmail" class="form-group" style="font-size: 15px; width: 500px" required type="email" placeholder="abc@gmail" />
+                                        </div>
+                                        <hr />
+                                        <p class="form-group" style="margin-left: 100px;font-size: 30px; font-family: 'Times New Roman', Times, serif">
+                                            Thời gian nhận hàng
+                                        </p>
+                                        <br />
+                                        <div class="form-group" style="margin-left: 50px">
+                                            <input type="radio" id="rdTime" name="TimeOrder" /><label style="font-size: 17px; margin-left: 5px; font-family: 'Times New Roman', Times, serif">
+                                                Giao hàng nhanh (tối thiểu 30 phút sau khi đặt hàng thành công)
+                                            </label>
+                                        </div>
+                                        <div class="form-group" style="margin-left: 50px">
+                                            <label style="font-size: 17px; margin-left: 40px; font-family: 'Times New Roman', Times, serif">
+                                            </label>
+                                        </div>
+                                        <div class="form-group" style="margin-left: 50px">
+                                            <input type="radio" checked id="rdTime" name="TimeOrder" /><label style="font-size: 17px; margin-left: 5px; font-family: 'Times New Roman', Times, serif">
+                                                Giao hàng tiêu chuẩn
+                                            </label>
+                                        </div>
+                                        <br />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <p class="form-group" style="margin-left: 100px;font-size: 30px ;font-family: 'Times New Roman', Times, serif">
+                                        Chọn cửa hàng đến lấy
+                                    </p>
+                                    <div class="card" style="background-color:lavender">
+                                        <div class="card-body">
+                                            <div class="form-group">
+                                                <a style="margin-left: 30px; font-size: 20px; font-family: 'Times New Roman', Times, serif">
+                                                    <input type="radio" style="margin-right: 10px" id="cosochinh" name="takeaway" value="1" checked />
+                                                    Cơ sở chính: Royal's Pizza An Dương Vương <br />
+                                                    <span style="margin-left: 70px; color: gray; font-size: 15px"><i class="fas fa-map-marker-alt">  273 An Dương Vương, Quận 5</i></span> <br />
+                                                    <span style="margin-left: 70px; color: gray; font-size: 15px"><i class="fas fa-phone">  Hotline: 1900 9999</i></span> <br />
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <div class="card" style="background-color:lavender">
+                                        <div class="card-body">
+                                            <div class="form-group">
+                                                <a style="margin-left: 30px; font-size: 20px; font-family: 'Times New Roman', Times, serif">
+                                                    <input type="radio" style="margin-right: 10px" id="chinhanh1" name="takeaway" value="2" />
+                                                    Chi Nhánh 1: Royal's Pizza Bà Huyện Thanh Quan <br />
+                                                    <span style="margin-left: 70px; color: gray; font-size: 15px"><i class="fas fa-map-marker-alt">  105 Bà Huyện Thanh Quan, Quận 3</i></span> <br />
+                                                    <span style="margin-left: 70px; color: gray; font-size: 15px"><i class="fas fa-phone">  Hotline: 1900 9999</i></span> <br />
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <div class="card" style="background-color:lavender">
+                                        <div class="card-body">
+                                            <div class="form-group">
+                                                <a style="margin-left: 30px; font-size: 20px; font-family: 'Times New Roman', Times, serif">
+                                                    <input type="radio" style="margin-right: 10px" id="chinhanh2" name="takeaway" value="3" />
+                                                    Chi Nhánh 2: Royal's Pizza Tôn Đức Thắng <br />
+                                                    <span style="margin-left: 70px; color: gray; font-size: 15px"><i class="fas fa-map-marker-alt">  04 Tôn Đức Thắng, Quận 1</i></span> <br />
+                                                    <span style="margin-left: 70px; color: gray; font-size: 15px"><i class="fas fa-phone">  Hotline: 1900 9999</i></span> <br />
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <div class="card" style="background-color:lavender">
+                                        <div class="card-body">
+                                            <div class="form-group">
+                                                <a style="margin-left: 30px; font-size: 20px; font-family: 'Times New Roman', Times, serif">
+                                                    <input type="radio" style="margin-right: 10px" id="chinhanh3" name="takeaway" value="4" />
+                                                    Chi Nhánh 3: Royal's Pizza Ngô Thời Nhiệm <br />
+                                                    <span style="margin-left: 70px; color: gray; font-size: 15px"><i class="fas fa-map-marker-alt">  20 Ngô Thời Nhiệm, Quận 3</i></span> <br />
+                                                    <span style="margin-left: 70px; color: gray; font-size: 15px"><i class="fas fa-phone">  Hotline: 1900 9999</i></span> <br />
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br />
+                                </div>
+                            </div>
+                            <div class="form-group" style="margin-left: 780px; margin-top: 100px">
+                                <button id="btnComeback" class="btn btn-lg bg-primary" style="font-size: 15px; width: 200px; margin-left: 20px">
+                                    <i class="fas fa-arrow-left"></i>
+                                    Quay Lại
+                                </button>
+                                <button type="submit" class="btn btn-lg bg-primary" style="font-size: 15px; width: 200px; margin-left: 20px">
+                                    <i class="fas fa-shipping-fast"></i>
+                                    Đặt Hàng
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+}
+
+
+

@@ -1,0 +1,71 @@
+﻿
+@{
+    ViewBag.Title = "MonAn";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var RelateProducts = (List<Model.EnityFramework.Product>)ViewBag.RelateProducts;
+}
+<link rel="stylesheet" type="text/css" href="~/content/client/info.css" />
+<div class="pz1">
+
+
+    <div class="container">
+        <div class="picture">
+            <div class="miycom"> <img src="@ViewBag.monan.Image"></div>
+            <div class="gia">@ViewBag.monan.Price.ToString("N0")</div>
+            <div class="add-actions">
+                <button data-name="@ViewBag.monan.Name" data-price="@ViewBag.monan.Price" class="add-to-cart btn btn-primary">
+                    <i class="add-cart active"><a href="/Cart/AddItem?productId=@ViewBag.monan.ID&quantity=1"><span class="glyphicon glyphicon-shopping-cart"></span>Đặt Hàng Ngay</a></i>
+                </button>
+            </div>
+        </div>
+        <div class="detail">
+            <div class="desc" style="font-size: 30px">@ViewBag.monan.Name</div>
+            <div class="text">
+                <p> Chi tiết sản phẩm:<br /></p>
+                <div class="thanhphan">
+                    &nbsp;&nbsp;* Trạng thái: @if (ViewBag.monan.Status)
+                    {<p1 style="color:red">Còn hàng.</p1><br />}
+                    else
+                    { <p1 style="color:red">Hết hàng.</p1><br />}
+                    &nbsp;&nbsp;* Trọng lượng: 500gr.<br />
+                    &nbsp;&nbsp;* Thành phần chính: @ViewBag.monan.Description<br />
+                    <div class="khuyenmai">
+                        <p>Khuyến mãi:</p>
+                        <div class="chitietkm">
+                            <i class="fas fa-check-circle"></i> Giảm ngay 5.000đ khi đặt chung với 1 pizza bất kì.<br />
+                            <i class="fas fa-check-circle"></i> Nhận hàng trong vòng 30p.<br />
+                            <i class="fas fa-check-circle"></i> Giảm 40% khi thanh toán qua ZaloPay.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+    <br />
+    <hr />
+    <h1>SẢN PHẨM LIÊN QUAN</h1>
+    @foreach (var item in RelateProducts)
+    {
+        <div class="responsive">
+            <div class="gallery">
+                <a href="/chi-tiet/@item.Alias-@item.ID">
+                    <img src="@item.Image">
+                </a>
+                <div class="desc">@item.Name</div>
+                <div class="info">@item.Description</div>
+                <div class="gia">@item.Price.ToString("N0")</div>
+                <div class="add-actions">
+                    <ul class="add-actions-link btn btn-primary" style="background-color: #0062cc">
+                        <li class="add-cart active" style="margin-left: 13px"><a href="/Cart/AddItem?productId=@item.ID&quantity=1" style="font-size: 15px"><span class="glyphicon glyphicon-shopping-cart"></span> THÊM VÀO GIỎ HÀNG</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    }
+
+    <div class="clearfix"></div>
+    <div style="padding:6px;"></div>
+</div>
+
+

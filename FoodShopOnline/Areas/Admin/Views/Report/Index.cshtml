@@ -1,0 +1,109 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layouts.cshtml";
+    var Benefit = (List<Model.ViewModel.ReportBenefit>)ViewBag.Benefit;
+    var Product = (List<Model.ViewModel.ReportProduct>)ViewBag.Product;
+    var Order = (List<Model.ViewModel.ReportOrder>)ViewBag.Order;
+}
+@section header{
+    Thống kê
+}
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item">
+        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
+           aria-selected="true">Thống kê doanh số</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile"
+           aria-selected="false">Thống kê sản phẩm</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact"
+           aria-selected="false">Thống kê đơn hàng</a>
+    </li>
+</ul>
+<div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Ngày</th>
+                        <th>Tháng</th>
+                        <th>Năm</th>
+                        <th>Tiền vốn</th>
+                        <th>Lợi Nhuận</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Benefit)
+                    {
+                        <tr id="row_@item.DateBenefit">
+                            <td>@item.DateBenefit</td>
+                            <td>@item.MonthBenefit</td>
+                            <td>@item.YearBenefit</td>
+                            <td>@item.Revenues</td>
+                            <td>@item.Benefit</td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Tên sản phẩm</th>
+                        <th>Tổng sản phẩm</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach(var item in Product)
+                    {
+                        <tr id="row_@item.ID">
+                            <td>@item.ID</td>
+                            <td>@item.Name</td>
+                            <td>@item.SumProduct</td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Tháng</th>
+                        <th>Năm</th>
+                        <th>Tổng đơn hàng</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Order)
+                    {
+                        <tr id="row_@item.MonthOrder">
+                            <td>@item.MonthOrder</td>
+                            <td>@item.YearOrder</td>
+                            <td>@item.SumOrder</td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+

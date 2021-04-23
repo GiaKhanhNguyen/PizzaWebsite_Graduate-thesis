@@ -1,0 +1,170 @@
+﻿@model List<Model.EnityFramework.Order>
+@{
+    ViewBag.Title = "ListOrderTakeAway";
+    Layout = "~/Areas/Admin/Views/Shared/_Layouts.cshtml";
+}
+@section header{
+    Thông Tin Đơn hàng
+}
+<hr />
+<h3>Đặt đến lấy</h3>
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item">
+        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
+           aria-selected="true">Chờ xác nhận</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile"
+           aria-selected="false">Chờ nhận hàng</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact"
+           aria-selected="false">Đã nhận hàng</a>
+    </li>
+</ul>
+<div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>TênKH</th>
+                        <th>Diachi</th>
+                        <th>Dienthoai</th>
+                        <th>TongHoaDon</th>
+                        <th>NgayMua</th>
+                        <th>PhuongThuc</th>
+                        <th>TrangThaiTT</th>
+                        <th>TrangThaiDH</th>
+                        <th>#</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        if (item.Status != false || item.PaymentStatus != "Chưa Thanh Toán")
+                        {
+                            continue;
+                        }
+                        <tr id="row_@item.ID">
+                            <td>@item.ID</td>
+                            <td>@item.CustomerName</td>
+                            <td>@item.CustomerAddress</td>
+                            <td>@item.CustomerMobile</td>
+                            <td>@item.Total.ToString("N0")</td>
+                            <td>@item.CreatedDate</td>
+                            <td>@item.PaymentMethod</td>
+                            <td>@item.PaymentStatus</td>
+                            <td>@item.Status</td>
+                            <td>
+                                @Html.ActionLink("Xác nhận", "XacNhan", new { id = item.ID })
+                                | <br />
+                                @Html.ActionLink(" Chi Tiết", "OrderDetail", new { id = item.ID })
+                                |
+                                @Ajax.ActionLink("Huỷ", "DeleteTakeOrder", new { @id = item.ID }, new AjaxOptions
+                                   {
+                                       Confirm = "Bạn có muốn xóa đơn hàng này không?",
+                                       OnComplete = "$('#row_" + @item.ID + "').remove()",
+                                       HttpMethod = "Delete"
+                                   })
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>TênKH</th>
+                        <th>Diachi</th>
+                        <th>Dienthoai</th>
+                        <th>TongHoaDon</th>
+                        <th>NgayMua</th>
+                        <th>PhuongThuc</th>
+                        <th>TrangThaiTT</th>
+                        <th>TrangThaiDH</th>
+                        <th>#</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        if ((item.Status != true && item.PaymentStatus != "Chưa Thanh Toán") ||
+                            item.PaymentStatus != "Chưa Thanh Toán" || item.Status != true)
+                        {
+                            continue;
+                        }
+                        <tr id="row_@item.ID">
+                            <td>@item.ID</td>
+                            <td>@item.CustomerName</td>
+                            <td>@item.CustomerAddress</td>
+                            <td>@item.CustomerMobile</td>
+                            <td>@item.Total.ToString("N0")</td>
+                            <td>@item.CreatedDate</td>
+                            <td>@item.PaymentMethod</td>
+                            <td>@item.PaymentStatus</td>
+                            <td>@item.Status</td>
+                            <td>
+                                @Html.ActionLink("Xác nhận đã nhận hàng", "XacNhanNhanHang", new { id = item.ID }) @*|
+                                    @Html.ActionLink("Huỷ", "Delete", new { id = item.ID })*@
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>TênKH</th>
+                        <th>Diachi</th>
+                        <th>Dienthoai</th>
+                        <th>TongHoaDon</th>
+                        <th>NgayMua</th>
+                        <th>PhuongThuc</th>
+                        <th>TrangThaiTT</th>
+                        <th>TrangThaiDH</th>
+                        <th>#</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        if (item.Status != true || item.PaymentStatus != "Đã Thanh Toán")
+                        {
+                            continue;
+                        }
+                        <tr id="row_@item.ID">
+                            <td>@item.ID</td>
+                            <td>@item.CustomerName</td>
+                            <td>@item.CustomerAddress</td>
+                            <td>@item.CustomerMobile</td>
+                            <td>@item.Total.ToString("N0")</td>
+                            <td>@item.CreatedDate</td>
+                            <td>@item.PaymentMethod</td>
+                            <td>@item.PaymentStatus</td>
+                            <td>@item.Status</td>
+                            <td>
+                                @Html.ActionLink(" Chi Tiết", "OrderDetail", new { id = item.ID })
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,63 @@
+﻿@model List<Model.EnityFramework.Menu>
+@{
+    ViewBag.Title = "Menu";
+    Layout = "~/Areas/Admin/Views/Shared/_Layouts.cshtml";
+}
+@section header{
+    Chức năng
+}
+<div class="card shadow mb-4">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>TenChucNang</th>
+                        <th>URL</th>
+                        <th>Icon</th>
+                        <th>ThuTuHienThi</th>
+                        <th>NhomChucNang</th>
+                        <th>Target</th>
+                        <th>TrangThai</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>ID</th>
+                        <th>TenChucNang</th>
+                        <th>URL</th>
+                        <th>Icon</th>
+                        <th>ThuTuHienThi</th>
+                        <th>NhomChucNang</th>
+                        <th>Target</th>
+                        <th>TrangThai</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+
+                    @if (Model != null)
+                    {
+                        foreach (var item in Model)
+                        {
+                            <tr id="row_@item.ID">
+                                <td>@item.ID</td>
+                                <td>@item.Name</td>
+                                <td>@item.URL</td>
+                                <td>@item.Icon</td>
+                                <td>@item.DisplayOrder</td>
+                                <td>@item.GroupID</td>
+                                <td>@item.Target</td>
+                                <td>@item.Status</td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+

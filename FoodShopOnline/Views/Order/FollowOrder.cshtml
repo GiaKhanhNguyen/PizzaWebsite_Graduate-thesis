@@ -1,0 +1,122 @@
+﻿@model List<Model.ViewModel.OrderViewModel>
+@{
+    ViewBag.Title = "FollowOrder";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    decimal total = 0;
+    int quantity = 0;
+
+}
+<br />
+
+<div class="content">
+    <div class="row">
+        <p style="font-weight: bold; font-family: Arial">CHI TIẾT ĐƠN HÀNG <span style="color: red"># @ViewBag.Order.ID</span></p>
+        <div class="col-md-12">
+            <div class="form-group">
+                <div class="alert alert-success" style="font-size: 15px">
+                    <div class="row">
+                        @if ((ViewBag.Order.Status == false && ViewBag.Order.PaymentStatus == "Chưa Thanh Toán"))
+                        {
+                            <label style="color: red; margin-left: 30px">CHỜ XÁC NHẬN</label>
+                        }
+                        @if ((ViewBag.Order.Status == true && ViewBag.Order.PaymentStatus == "Chưa Thanh Toán"))
+                        {
+                            <label style="color: red; margin-left: 30px">ĐANG GIAO HÀNG</label>
+                        }
+                        @if (ViewBag.Order.Status == true && ViewBag.Order.PaymentStatus == "Đã Thanh Toán")
+                        {
+                            <label style="color: red; margin-left: 30px">ĐÃ GIAO HÀNG</label>
+                        }
+                        <label style="color:gray; margin-left: 800px">Ngày đặt hàng: <span>@ViewBag.Order.CreatedDate</span></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <section class="section-content padding-y">
+                <div class="card mx-auto" style="width: 100%; height: 210px; border-radius: 10px">
+                    <article class="card-body">
+                        <div class="form-group">
+                            <label style="color: #04354c; font-size: 20px">ĐỊA CHỈ NHẬN HÀNG</label> <br />
+                            <label style="font-size: 17px">Địa chỉ</label> <br />
+                            <label style="color: gray; font-size: 15px">@ViewBag.Order.CustomerAddress</label> <br />
+                            <label style="font-size: 17px">Điện thoại</label> <br />
+                            <label style="color: gray; font-size: 15px">@ViewBag.Order.CustomerMobile</label> <br />
+                        </div>
+                    </article>
+                </div>
+            </section>
+        </div>
+        <div class="col-md-4">
+            <section class="section-content padding-y">
+                <div class="card mx-auto" style="width: 100%; height: 210px; border-radius: 10px">
+                    <article class="card-body">
+                        <div class="form-group">
+                            <label style="color: #04354c; font-size: 20px">HÌNH THỨC ĐẶT HÀNG</label> <br />
+                            <label style="font-size: 17px">Phương thức đặt hàng</label> <br />
+                            @if (ViewBag.Order.OrderMethod == "Đặt Giao Hàng")
+                            {
+                                <label style="color: gray; font-size: 15px">Đặt giao hàng</label> <br />
+                            }
+                            @if (ViewBag.Order.OrderMethod == "Đặt Đến Lấy")
+                            {
+                                <label style="color: gray; font-size: 15px">Nhận hàng tại cửa hàng</label> <br />
+                            }
+                            <label style="font-size: 17px">Phí vận chuyển</label> <br />
+                            <label style="color: gray; font-size: 15px">Miễn phí</label> <br />
+                        </div>
+                    </article>
+                </div>
+            </section>
+        </div>
+        <div class="col-md-4">
+            <section class="section-content padding-y">
+                <div class="card mx-auto" style="width: 100%; height: 210px; border-radius: 10px">
+                    <article class="card-body">
+                        <div class="form-group">
+                            <label style="color: #04354c; font-size: 20px">HÌNH THỨC THANH TOÁN</label> <br />
+                            <label style="font-size: 17px">@ViewBag.Order.PaymentMethod</label> <br />
+                            <label style="color: gray; font-size: 15px">@ViewBag.Order.PaymentStatus</label> <br />
+                        </div>
+                    </article>
+                </div>
+            </section>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <td style="font-weight: bold; color: #d30e15">CHI TIẾT ĐƠN HÀNG</td>
+                    <td></td>
+                    <td></td>
+                    <td style="font-weight: bold; color: #d30e15">ĐƠN GIÁ</td>
+                    <td style="font-weight: bold; color: #d30e15">THÀNH TIỀN</td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        @*<td>@item.Product.ID</td>*@
+                        <td>@item.Product.Name</td>
+                        <td><img src="@item.Product.Image" width="100" /></td>
+                        <td><input type="text" class="txtQuantity" data-id="@item.Product.ID" value="x @item.OrderDetail.Quantity" disabled /></td>
+                        @*<td><input type="checkbox" checked/> Dày</td>*@
+                        <td>@item.Product.Price.ToString("N0")</td>
+                        <td>@((item.Product.Price * item.OrderDetail.Quantity).ToString("N0"))</td>
+                    </tr>
+                    total = (item.Product.Price * item.OrderDetail.Quantity) + total;
+                    quantity = item.OrderDetail.Quantity + quantity;
+                }
+            </tbody>
+        </table>
+        <br />
+        <br />
+        <div class="row">
+            <div style="margin-left: 870px">
+                <h1>Tổng số lượng: <span style="color:#d30e15">@quantity </span></h1>
+                <h1>Tổng Tiền: <span style="color:#d30e15">@total.ToString("N0")đ </span></h1>
+            </div>
+        </div>
+    </div>
+</div>

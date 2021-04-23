@@ -1,0 +1,44 @@
+﻿@using Model.EnityFramework;
+@model List<Product>
+@{
+    ViewBag.Title = "Search";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@if (Model.Count < 1)
+{
+    //<h1>404</h1>
+    <span class="alert alert-danger" style="font-size: 20px">Không tìm thấy sản phẩm theo từ khóa. Xin Nhập Lại</span>
+}
+else
+{
+    <h2 style="margin-top: 40px; font-weight: bold">KẾT QUẢ TÌM KIẾM THEO TỪ KHÓA: <span style="font-weight:bold; text-transform:uppercase;" upper>@ViewBag.Search </span> </h2>
+    foreach (var item in Model)
+    {
+
+        if (item.Status == true)
+        {
+            <div class="responsive">
+                <div class="gallery">
+                    <a href="/chi-tiet/@item.Alias-@item.ID">
+                        <img src="@item.Image">
+                    </a>
+                    <div class="desc">@item.Name</div>
+                    <div class="info">@item.Description</div>
+                    <div class="gia">@item.Price.ToString("N0")</div>
+                    <div class="add-actions">
+                        <ul class="add-actions-link btn btn-primary" style="background-color: #0062cc">
+                            <li class="add-cart active" style="margin-left: 13px"><a href="/Cart/AddItem?productId=@item.ID&quantity=1" style="font-size: 15px"><span class="glyphicon glyphicon-shopping-cart"></span> THÊM VÀO GIỎ HÀNG</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        }
+
+    }
+    <div class="clearfix"></div>
+    <div style="padding:6px;"></div>
+
+}
+
+
+

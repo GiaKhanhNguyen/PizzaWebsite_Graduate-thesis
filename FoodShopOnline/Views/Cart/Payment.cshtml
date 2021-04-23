@@ -1,0 +1,114 @@
+﻿@model List<FoodShopOnline.Models.CartItem>
+@{
+    ViewBag.Title = "Thanh toan";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    //decimal total = 0;
+    //int quantity = 0;
+}
+@section jsFooter{
+    <script src="~/content/client/controller/paymentController.js"></script>
+}
+<br />
+@*<p class="text-center">
+        Sản Phẩm
+    </p>*@
+<section class="section-content padding-y">
+
+    <div class="card mx-auto" style="width: 100%; height: 100%">
+        <article class="card-body">
+            <div class="content">
+                <center>
+                    <img src="/content/client/images/OrderStatus/3.png" />
+                    <br />
+                    <p>ĐIỀN THÔNG TIN ĐẶT HÀNG</p>
+                    <hr />
+                </center>
+                <br />
+                <p class="form-group" style="margin-left: 50px; font-family: 'Times New Roman', Times, serif">
+                    Đặt giao hàng
+                </p>
+                <hr />
+                <div class="content">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-6">
+                                <p class="form-group" style="margin-left: 100px;font-size: 30px; font-family: 'Times New Roman', Times, serif">
+                                    Thông tin nhận hàng
+                                </p>
+                                <div class="section group">
+                                    @using (Html.BeginForm("Payment", "Cart", FormMethod.Post))
+                                    {
+                                        <div class="form-group">
+                                            <label class="fa fa-user" style="font-size: 15px; margin-right: 30px"> Họ Và Tên*</label>
+                                            <input name="CustomerName" type="text" class="form-group" style="font-size: 15px; width: 500px" required />
+                                        </div>
+                                        <div class="form-group">
+                                            <label style="font-size: 15px; margin-right: 26px" class="fas fa-phone"> Điện thoại*</label>
+                                            <input name="CustomerMobie" class="form-group" style="font-size: 15px; width: 500px" type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required placeholder="090-123-1234" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label style="font-size: 15px; margin-right: 55px" class="fas fa-envelope"> Email*</label>
+                                            <input name="CustomerEmail" class="form-group" style="font-size: 15px; width: 500px" required type="email" placeholder="abc@gmail" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label style="font-size: 15px; margin-right: 45px" class="fas fa-city"> Tỉnh/Thành*</label>
+                                            <input name="City" class="form-group" style="font-size: 15px; width: 500px" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label style="font-size: 15px; margin-right: 45px" class="fas fa-home"> Quận/Huyện*</label>
+                                            <input name="District" class="form-group" style="font-size: 15px; width: 500px" required />
+                                        </div>
+                                        <div class="form-group">
+                                            <label style="font-size: 15px; margin-right: 45px" class="fas fa-home"> Phường/Xã*</label>
+                                            <input name="Xa" class="form-group" style="font-size: 15px; width: 500px" required />
+                                        </div>
+                                        <div class="form-group">
+                                            <label style="font-size: 15px; margin-right: 45px" class="fas fa-home"> Số Nhà/Hẻm*</label>
+                                            <input name="NumberHome" class="form-group" style="font-size: 15px; width: 500px" required />
+                                        </div>
+                                        <div class="form-group">
+                                            <label style="font-size: 15px; margin-right: 45px" class="fas fa-road"> Tên Đường*</label>
+                                            <input name="NameRoad" class="form-group" style="font-size: 15px; width: 500px" required />
+                                        </div>
+                                        <button type="submit" class="btn btn-lg bg-primary" style="font-size: 15px; width: 200px; margin-left: 1000px">
+                                            <i class="fas fa-shipping-fast"></i>
+                                            Đặt Hàng
+                                        </button>
+                                    }
+                                    <br />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <p class="form-group" style="margin-left: 180px;font-size: 30px; font-family: 'Times New Roman', Times, serif">
+                                    Thời gian nhận hàng
+                                </p>
+                                <br />
+                                <div class="form-group" style="margin-left: 90px">
+                                    <input type="radio" id="rdTime" name="TimeOrder" /><label style="font-size: 17px; margin-left: 5px; font-family: 'Times New Roman', Times, serif">
+                                        Giao hàng nhanh (tối thiểu 30 phút sau khi đặt hàng thành công)
+                                    </label>
+                                </div>
+                                <div class="form-group" style="margin-left: 90px">
+                                    <label style="font-size: 17px; margin-left: 40px; font-family: 'Times New Roman', Times, serif">
+                                    </label>
+                                </div>
+                                <div class="form-group" style="margin-left: 90px">
+                                    <input type="radio" checked id="rdTime" name="TimeOrder" /><label style="font-size: 17px; margin-left: 5px; font-family: 'Times New Roman', Times, serif">
+                                        Giao hàng tiêu chuẩn
+                                    </label>
+                                </div>
+                            </div>
+                            <button id="btnComeback" class="btn btn-lg bg-primary" style="font-size: 15px; background-color:gray; width: 200px; margin-top: 425px; margin-left: 190px ">
+                                <i class="fas fa-arrow-left"></i>
+                                Quay Lại
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </div>
+</section>
+
+
+

@@ -1,0 +1,81 @@
+﻿@model List<FoodShopOnline.Models.CartItem>
+@{
+    ViewBag.Title = "MethodPayment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    decimal total = 0;
+}
+@section jsFooter{
+    <script src="~/content/client/controller/paymentController.js"></script>
+}
+
+<center>
+    <br />
+    <img src="/content/client/images/OrderStatus/4.png" />
+    <br />
+    <p>ĐIỀN THÔNG TIN THANH TOÁN</p>
+</center>
+<div class="content">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <p style="font-size: 23px">PHƯƠNG THỨC THANH TOÁN</p>
+                <section class="section-content padding-y">
+                    <div class="card mx-auto" style="width: 100%; height: 100%">
+                        <article class="card-body">
+                            @using (Html.BeginForm("MethodPayment", "Cart", FormMethod.Post))
+                            {
+                                <div class="form-group">
+                                    <a style="margin-left: 30px; font-size: 20px">
+                                        <input type="radio" checked style="margin-right: 10px" id="cash" name="paymentMethod" value="0" />
+                                        <img src="/content/client/images/OrderStatus/TienMat.png" />  Thanh toán bằng tiền mặt khi nhận hàng
+                                    </a>
+                                </div>
+                                <div class="form-group">
+                                    <a style="margin-left: 30px; font-size: 20px">
+                                        <input type="radio" style="margin-right: 10px" id="paypal" name="paymentMethod" value="1" />
+                                        <img src="/content/client/images/OrderStatus/PayPal.png" />  Thanh toán qua PayPal
+                                    </a>
+                                </div>
+                                <button type="submit" class="btn btn-lg bg-primary" style="font-size: 15px; width: 200px; margin-left: 350px">
+                                    <i class="fas fa-shipping-fast"></i>
+                                    Hoàn tất đặt hàng
+                                </button>
+                            }
+                        </article>
+                    </div>
+                </section>
+            </div>
+            @*<button id="btnbackIOrder" class="btn btn-lg bg-primary" style="font-size: 15px; width: 200px; margin-left: 364px">
+                <i class="fas fa-arrow-left"></i>
+                Quay Lại
+            </button>*@
+        </div>
+        <div class="col-md-6">
+            <section class="section-content padding-y">
+                <div class="card mx-auto" style="width: 100%; height: 100%">
+                    <article class="card-body">
+                        <p style="color:red; font-size: 23px">CHI TIẾT ĐƠN HÀNG</p>
+                        <hr />
+                        @foreach (var item in Model)
+                        {
+                            <h2>@item.Product.Name</h2>
+                            <h2 style="margin-left: 300px">@item.Product.Price x @item.Quantity</h2>
+                            total = (item.Product.Price * item.Quantity) + total;
+                        }
+                        <hr />
+                        <div class="row" style="margin-left: 5px">
+                            <h2>Tạm tính <span style="margin-left: 213px">@total.ToString("N0")đ</span></h2>
+                            <h2>Phụ thu <span style="margin-left: 220px">0đ</span></h2>
+                            <h2>Giảm giá <span style="margin-left: 213px">0đ</span></h2>
+                            <h2>Phí giao hàng <span style="margin-left: 170px">0đ</span></h2>
+                        </div>
+                        <hr />
+                        <div class="row" style="margin-left: 5px">
+                            <h2 style="color:red; font-weight: bold">Tổng Tiền: <span style="color:red; margin-left: 195px">@total.ToString("N0")đ </span></h2>
+                        </div>
+                    </article>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>

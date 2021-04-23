@@ -1,0 +1,70 @@
+﻿@using FoodShopOnline.Common;
+@{
+    ViewBag.Title = "OrderKind";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    var session = (UserLogin)Session[FoodShopOnline.Common.CommonConstants.User_Session];
+}
+
+@section jsFooter{
+    <script src="~/content/client/controller/paymentController.js"></script>
+}
+
+@using (Html.BeginForm("OrderKind", "Cart", FormMethod.Post))
+{
+    <section class="section-content padding-y">
+
+        <div class="card mx-auto" style="width: 100%; height: 100%">
+            <article class="card-body">
+                <div class="content">
+                    <center>
+                        <img src="/content/client/images/OrderStatus/1.png" />
+                        <br />
+                        <p>HÌNH THỨC ĐẶT HÀNG</p>
+                        <h3>Quý khách vui lòng lựa chọn phương phức giao hàng phù hợp với nhu cầu của mình</h3>
+                        <div class="form-group" style="margin-left: 300px">
+                            <div class="row">
+                                @*@if (session == null)
+                                    {
+                                        <a href="/login-for-order"><img src="/content/client/images/OrderStatus/DatLay.png" /></a>
+                                        <h3 style="margin-top: 100px">HOẶC</h3>
+                                        <a href="/login-for-order"><img src="/content/client/images/OrderStatus/DatGiaoHang.png" /></a>
+                                    }
+                                    @if (session != null)
+                                    {*@
+                                @*<a href="/thong-tin-lay-hang"><img src="/content/client/images/OrderStatus/DatLay.png" /></a>
+                                    <h3 style="margin-top: 100px">HOẶC</h3>
+                                    <a href="/thong-tin-dat-hang"><img src="/content/client/images/OrderStatus/DatGiaoHang.png" /></a>*@
+                                <input id="datlayid" type="radio" class="css-checkbox" name="orderKind" value="DatLay">
+                                <label for="datlayid" class="css-label"></label>
+
+                                <h3 style="margin-top: 100px">HOẶC</h3>
+
+                                <input id="datgiaohangid" type="radio" class="css-checkbox1" name="orderKind" value="DatGiaoHang">
+                                <label for="datgiaohangid" class="css-label1"></label>
+                                @*}*@
+                            </div>
+
+                        </div>
+                        <h2>
+                            Từ <span style="font-weight: bold">20/6/2020</span>, ưu đãi MUA 1 TẶNG 1 vào mỗi thứ 7 & chủ nhật hàng tuần chỉ phục vụ Dùng Tại Cửa Hàng hoặc Mang Đi.
+                            Vui lòng đặt hàng trước qua Website để không phải chờ đợi khi tới nhà hàng để lấy hàng.
+                        </h2>
+                    </center>
+                    <div class="form-group" style="margin-left: 750px; margin-top: 40px">
+                        <button id="btnComebackCart" class="btn btn-lg bg-primary" style="font-size: 15px; width: 200px; margin-left: 20px">
+                            <i class="fas fa-arrow-left"></i>
+                            Quay Lại
+                        </button>
+                        <button type="submit" class="btn btn-lg bg-primary" style="font-size: 15px; width: 200px; margin-left: 20px">
+                            <i class="fas fa-shipping-fast"></i>
+                            Đặt Hàng
+                        </button>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+}

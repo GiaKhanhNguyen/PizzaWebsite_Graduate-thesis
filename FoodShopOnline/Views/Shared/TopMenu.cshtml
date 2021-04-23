@@ -1,0 +1,45 @@
+﻿@model List<Model.EnityFramework.Menu>
+@using FoodShopOnline.Common;
+<div>
+    @{
+        var session = (UserLogin)Session[FoodShopOnline.Common.CommonConstants.User_Session];
+    }
+    @if (session == null)
+    {
+        foreach (var item in Model)
+        {
+            
+            <a href="@item.URL" target="@item.Target"><i class="@item.Icon"></i> @item.Name</a>
+        }
+    }
+    else
+    {
+        @*<a>Xin Chào!!!!: @session.UserName</a>
+        <a><i class="fas fa-sign-out-alt"></i>@Html.ActionLink("Đăng Xuất", "Logout", "User")</a>*@
+
+        <div class="dropdown">
+            <a class="dropdown" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <img class="img-profile rounded-circle" src="@session.Avatar" style="width: 25px; height: 30px">
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small">@session.UserName</span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                <a class="dropdown-item" href="/thong-tin-tai-khoan">
+                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Thông tin tài khoản
+                </a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="/don-hang-da-mua">
+                    <i class="fas fa-shopping-cart fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Đơn hàng đã mua
+                </a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="/User/Logout">
+                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Đăng Xuất
+                </a>
+            </div>
+        </div>
+    }
+</div>
+
+
