@@ -33,7 +33,6 @@
                 <thead>
                     <tr>
                         <th>TenSP</th>
-                        <th>Alias</th>
                         <th>HinhAnh</th>
                         <th>MaDanhMuc</th>
                         <th>Gia</th>
@@ -46,7 +45,6 @@
                 <tfoot>
                     <tr>
                         <th>TenSP</th>
-                        <th>Alias</th>
                         <th>HinhAnh</th>
                         <th>MaDanhMuc</th>
                         <th>Gia</th>
@@ -61,14 +59,13 @@
                     {
                         <tr id="row_@item.ID">
                             <td>@item.Name</td>
-                            <td>@item.Alias</td>
                             <td><img src="@item.Image" style="width: 70px; height: 70px" /></td>
                             <td>@item.CategoryID</td>
                             <td>@item.Price</td>
                             <td>@item.OriginalPrice</td>
                             <td>@item.Description</td>
                             <td><a href="#" class="btn-active-product" data-id="@item.ID">@(item.Status ? "Kích hoạt" : "Khóa")</a></td>
-                            <td>
+                            <td style="width: 100px">
                                 <a href="~/Admin/Product/Edit/@item.ID">Sửa</a>
                                 |
                                 @Ajax.ActionLink("Xóa", "Delete", new { @id = item.ID }, new AjaxOptions

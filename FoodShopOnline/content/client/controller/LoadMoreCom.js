@@ -2,7 +2,7 @@
 
     var loadCount = 1;
     var loading = $("#loading");
-    $("#loadMoreKhaiVi").on("click", function (e) {
+    $("#LoadMoreCom").on("click", function (e) {
 
         e.preventDefault();
 
@@ -16,7 +16,7 @@
             }
         });
 
-        var url = "/Home/loadMoreKhaiVi/";
+        var url = "/Home/LoadMoreCom/";
         $.ajax({
             url: url,
             data: { size: loadCount * 4 },
@@ -25,12 +25,12 @@
             success: function (data) {
 
                 if (data.length !== 0) {
-                    $(data.ModelString).insertBefore("#loadMoreKhaiVi").hide().fadeIn(2000);
+                    $(data.ModelString).insertBefore("#LoadMoreCom").hide().fadeIn(2000);
                 }
 
                 var ajaxModelCount = data.ModelCount - (loadCount * 4);
                 if (ajaxModelCount <= 0) {
-                    $("#loadMoreKhaiVi").hide().fadeOut(2000);
+                    $("#LoadMoreCom").hide().fadeOut(2000);
                 }
 
             },

@@ -15,7 +15,7 @@ namespace FoodShopOnline.Controllers
 {
     public class CartController : Controller
     {
-        private PayPal.Api.Payment payment;
+        private Payment payment;
         // GET: Cart
         public ActionResult Index()
         {
@@ -50,7 +50,11 @@ namespace FoodShopOnline.Controllers
                     var item = new CartItem();
                     item.Product = product;
                     item.Quantity = quantity;
+                    item.Dough = Session[CommonConstants.DoughKind].ToString(); 
+                    item.Size = Session[CommonConstants.SizeProduct].ToString();
                     list.Add(item);
+                    Session[CommonConstants.DoughKind] = null;
+                    Session[CommonConstants.SizeProduct] = null;
                 }
                 //Gán vào session
                 Session[CommonConstants.CartSession] = list;
@@ -61,8 +65,12 @@ namespace FoodShopOnline.Controllers
                 var item = new CartItem();
                 item.Product = product;
                 item.Quantity = quantity;
+                item.Dough = Session[CommonConstants.DoughKind].ToString();
+                item.Size = Session[CommonConstants.SizeProduct].ToString();
                 var list = new List<CartItem>();
                 list.Add(item);
+                Session[CommonConstants.DoughKind] = null;
+                Session[CommonConstants.SizeProduct] = null;
                 //gắn vào session
                 Session[CommonConstants.CartSession] = list;
             }
@@ -146,7 +154,7 @@ namespace FoodShopOnline.Controllers
                 {
                     model.CustomerAddress = "273 An Dương Vương, Quận 5, Hồ Chí Minh";
                 }
-                else if(takeaway == "2")
+                else if (takeaway == "2")
                 {
                     model.CustomerAddress = "105 Bà Huyện Thanh Quan, Quận 3, Hồ Chí Minh";
                 }
@@ -176,7 +184,7 @@ namespace FoodShopOnline.Controllers
         public ActionResult OrderKind(string orderKind)
         {
             var session = (UserLogin)Session[CommonConstants.User_Session];
-            if(session != null)
+            if (session != null)
             {
                 if (orderKind == "DatLay")
                 {
@@ -223,7 +231,7 @@ namespace FoodShopOnline.Controllers
             model = (PaymentModel)Session[CommonConstants.OrderSession];
             string orderKind = Session[CommonConstants.OrderKind].ToString();
             //Đặt hàng cần đăng nhập - khách hàng thường xuyên
-            if(session != null)
+            if (session != null)
             {
                 var order = new Model.EnityFramework.Order();
                 order.CreatedDate = DateTime.Now;
@@ -249,47 +257,7 @@ namespace FoodShopOnline.Controllers
                 else
                 {
                     order.PaymentMethod = "Thanh Toán qua PayPal";
-                    //APIContext apiContext = Configuration.GetAPIContext();
-
-                    //try
-                    //{
-                    //    string payerId = Request.Params["PayerID"];
-
-                    //    if (string.IsNullOrEmpty(payerId))
-                    //    {
-                    //        string baseURI = Request.Url.Scheme + "://" + Request.Url.Authority + "/thong-tin-thanh-toan?";
-                    //        var guid = Convert.ToString((new Random()).Next(100000));
-                    //        var createdPayment = this.CreatePayment(apiContext, baseURI + "guid=" + guid);
-                    //        var links = createdPayment.links.GetEnumerator();
-                    //        string paypalRedirectUrl = null;
-                    //        while (links.MoveNext())
-                    //        {
-                    //            Links lnk = links.Current;
-                    //            if (lnk.rel.ToLower().Trim().Equals("approval_url"))
-                    //            {
-                    //                paypalRedirectUrl = lnk.href;
-                    //            }
-                    //        }
-                    //        // saving the paymentID in the key guid
-                    //        Session.Add(guid, createdPayment.id);
-
-                    //        return Redirect(paypalRedirectUrl);
-                    //    }
-                    //    else
-                    //    {
-                    //        var guid = Request.Params["guid"];
-                    //        var executedPayment = ExecutePayment(apiContext, payerId, Session[guid] as string);
-                    //        if (executedPayment.state.ToLower() != "approved")
-                    //        {
-                    //            return Redirect("/dat-hang-that-bai");
-                    //        }
-                    //    }
-                    //}
-                    //catch (Exception ex)
-                    //{
-                    //    Logger.Log("Error" + ex.Message);
-                    //    return Redirect("/dat-hang-that-bai");
-                    //}
+                    return RedirectToAction("PaymentWithPayPal", "Cart");
                 }
                 order.Status = false;
                 order.PaymentStatus = "Chưa Thanh Toán";
@@ -367,47 +335,7 @@ namespace FoodShopOnline.Controllers
                 else
                 {
                     orderNoLogin.PaymentMethod = "Thanh Toán qua PayPal";
-                    //APIContext apiContext = Configuration.GetAPIContext();
-
-                    //try
-                    //{
-                    //    string payerId = Request.Params["PayerID"];
-
-                    //    if (string.IsNullOrEmpty(payerId))
-                    //    {
-                    //        string baseURI = Request.Url.Scheme + "://" + Request.Url.Authority + "/thong-tin-thanh-toan?";
-                    //        var guid = Convert.ToString((new Random()).Next(100000));
-                    //        var createdPayment = this.CreatePayment(apiContext, baseURI + "guid=" + guid);
-                    //        var links = createdPayment.links.GetEnumerator();
-                    //        string paypalRedirectUrl = null;
-                    //        while (links.MoveNext())
-                    //        {
-                    //            Links lnk = links.Current;
-                    //            if (lnk.rel.ToLower().Trim().Equals("approval_url"))
-                    //            {
-                    //                paypalRedirectUrl = lnk.href;
-                    //            }
-                    //        }
-                    //        // saving the paymentID in the key guid
-                    //        Session.Add(guid, createdPayment.id);
-
-                    //        return Redirect(paypalRedirectUrl);
-                    //    }
-                    //    else
-                    //    {
-                    //        var guid = Request.Params["guid"];
-                    //        var executedPayment = ExecutePayment(apiContext, payerId, Session[guid] as string);
-                    //        if (executedPayment.state.ToLower() != "approved")
-                    //        {
-                    //            return Redirect("/dat-hang-that-bai");
-                    //        }
-                    //    }
-                    //}
-                    //catch (Exception ex)
-                    //{
-                    //    Logger.Log("Error" + ex.Message);
-                    //    return Redirect("/dat-hang-that-bai");
-                    //}
+                    return RedirectToAction("PaymentWithPayPal", "Cart");
                 }
                 orderNoLogin.Status = false;
                 orderNoLogin.PaymentStatus = "Chưa Thanh Toán";
@@ -459,11 +387,236 @@ namespace FoodShopOnline.Controllers
                 return Redirect("/dat-hang-thanh-cong");
             }
         }
-        //[HttpGet]
-        //public ActionResult OrderNoLogin()
-        //{
-        //    return View();
-        //}
+
+        public ActionResult PaymentWithPayPal()
+        {
+            var session = (UserLogin)Session[CommonConstants.User_Session];
+            var model = new PaymentModel();
+            model = (PaymentModel)Session[CommonConstants.OrderSession];
+            string orderKind = Session[CommonConstants.OrderKind].ToString();
+            //Đặt hàng cần đăng nhập - khách hàng thường xuyên
+            if (session != null)
+            {
+                var order = new Model.EnityFramework.Order();
+                order.CreatedDate = DateTime.Now;
+                order.CustomerID = session.UserID;
+                order.CustomerName = model.CustomerName;
+                order.CustomerEmail = model.CustomerEmail;
+                order.CustomerMobile = model.CustomerMobie;
+                order.CustomerAddress = model.CustomerAddress;
+                order.CreatedBy = "CUSTOMER";
+
+                if (orderKind == "DatLay")
+                {
+                    order.OrderMethod = "Đặt Đến Lấy";
+                }
+                else
+                {
+                    order.OrderMethod = "Đặt Giao Hàng";
+                }
+                order.PaymentMethod = "Thanh Toán qua PayPal";
+                APIContext apiContext = Configuration.GetAPIContext();
+
+                try
+                {
+                    string payerId = Request.Params["PayerID"];
+
+                    if (string.IsNullOrEmpty(payerId))
+                    {
+                        string baseURI = Request.Url.Scheme + "://" + Request.Url.Authority + "/Cart/PaymentWithPayPal?";
+                        var guid = Convert.ToString((new Random()).Next(100000));
+                        var createdPayment = this.CreatePayment(apiContext, baseURI + "guid=" + guid);
+                        var links = createdPayment.links.GetEnumerator();
+                        string paypalRedirectUrl = null;
+                        while (links.MoveNext())
+                        {
+                            Links lnk = links.Current;
+                            if (lnk.rel.ToLower().Trim().Equals("approval_url"))
+                            {
+                                paypalRedirectUrl = lnk.href;
+                            }
+                        }
+                        // saving the paymentID in the key guid
+                        Session.Add(guid, createdPayment.id);
+
+                        return Redirect(paypalRedirectUrl);
+                    }
+                    else
+                    {
+                        var guid = Request.Params["guid"];
+                        var executedPayment = ExecutePayment(apiContext, payerId, Session[guid] as string);
+                        if (executedPayment.state.ToLower() != "approved")
+                        {
+                            return Redirect("/dat-hang-that-bai");
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Logger.Log("Error" + ex.Message);
+                    return Redirect("/dat-hang-that-bai");
+                }
+                order.Status = false;
+                order.PaymentStatus = "Chưa Thanh Toán";
+
+                try
+                {
+                    var cart = (List<CartItem>)Session[CommonConstants.CartSession];
+                    var detail = new OrderDetailDAO();
+                    decimal total = 0;
+
+                    foreach (var item in cart)
+                    {
+                        total += (item.Product.Price * item.Quantity);
+                    }
+                    order.Total = total;
+                    new OrderDAO().Insert(order);
+                    total = 0;
+                    foreach (var item in cart)
+                    {
+                        var orderDetail = new OrderDetail();
+                        orderDetail.ProductID = item.Product.ID;
+                        orderDetail.OrderID = order.ID;
+                        orderDetail.Quantity = item.Quantity;
+                        orderDetail.Price = item.Product.Price;
+                        detail.Insert(orderDetail);
+
+                        total += (item.Product.Price * item.Quantity);
+                    }
+
+                    // model.CustomerAddress = model.CustomerAddress;
+
+                    string content = System.IO.File.ReadAllText(Server.MapPath("~/content/client/template/neworder.html"));
+
+                    content = content.Replace("{{OrderID}}", order.ID.ToString());
+                    content = content.Replace("{{CustomerName}}", model.CustomerName);
+                    content = content.Replace("{{Phone}}", model.CustomerMobie);
+                    content = content.Replace("{{Address}}", model.CustomerAddress);
+                    content = content.Replace("{{Email}}", order.CustomerEmail);
+                    content = content.Replace("{{Total}}", total.ToString("N0"));
+                    content = content.Replace("{{OrderMethod}}", order.OrderMethod);
+
+                    new MailHelper().SendMail(order.CustomerEmail, "Đơn Hàng Pizza", content);
+
+                    Session["OrderID"] = order.ID;
+                }
+                catch (Exception)
+                {
+                    return Redirect("/dat-hang-that-bai");
+                }
+                return Redirect("/dat-hang-thanh-cong");
+            }
+            else
+            {
+                var orderNoLogin = new OrderNoLogin();
+                orderNoLogin.CreatedDate = DateTime.Now;
+                orderNoLogin.CustomerName = model.CustomerName;
+                orderNoLogin.CustomerEmail = model.CustomerEmail;
+                orderNoLogin.CustomerMobile = model.CustomerMobie;
+                orderNoLogin.CustomerAddress = model.CustomerAddress;
+                orderNoLogin.CreatedBy = "CUSTOMERNOLOGIN";
+
+                if (orderKind == "DatLay")
+                {
+                    orderNoLogin.OrderMethod = "Đặt Đến Lấy";
+                }
+                else
+                {
+                    orderNoLogin.OrderMethod = "Đặt Giao Hàng";
+                }
+                orderNoLogin.PaymentMethod = "Thanh Toán qua PayPal";
+                APIContext apiContext = Configuration.GetAPIContext();
+
+                try
+                {
+                    string payerId = Request.Params["PayerID"];
+
+                    if (string.IsNullOrEmpty(payerId))
+                    {
+                        string baseURI = Request.Url.Scheme + "://" + Request.Url.Authority + "/Cart/PaymentWithPayPal?";
+                        var guid = Convert.ToString((new Random()).Next(100000));
+                        var createdPayment = this.CreatePayment(apiContext, baseURI + "guid=" + guid);
+                        var links = createdPayment.links.GetEnumerator();
+                        string paypalRedirectUrl = null;
+                        while (links.MoveNext())
+                        {
+                            Links lnk = links.Current;
+                            if (lnk.rel.ToLower().Trim().Equals("approval_url"))
+                            {
+                                paypalRedirectUrl = lnk.href;
+                            }
+                        }
+                        // saving the paymentID in the key guid
+                        Session.Add(guid, createdPayment.id);
+
+                        return Redirect(paypalRedirectUrl);
+                    }
+                    else
+                    {
+                        var guid = Request.Params["guid"];
+                        var executedPayment = ExecutePayment(apiContext, payerId, Session[guid] as string);
+                        if (executedPayment.state.ToLower() != "approved")
+                        {
+                            return Redirect("/dat-hang-that-bai");
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Logger.Log("Error" + ex.Message);
+                    return Redirect("/dat-hang-that-bai");
+                }
+                orderNoLogin.Status = false;
+                orderNoLogin.PaymentStatus = "Chưa Thanh Toán";
+
+                try
+                {
+                    var cart = (List<CartItem>)Session[CommonConstants.CartSession];
+                    var detail = new OrderDetailDAO();
+                    decimal total = 0;
+
+                    foreach (var item in cart)
+                    {
+                        total += (item.Product.Price * item.Quantity);
+                    }
+                    orderNoLogin.Total = total;
+                    new OrderDAO().InsertCusNoLo(orderNoLogin);
+                    total = 0;
+                    foreach (var item in cart)
+                    {
+                        var orderDetail = new OrderDetailsNoLogin();
+                        orderDetail.ProductID = item.Product.ID;
+                        orderDetail.OrderID = orderNoLogin.ID;
+                        orderDetail.Quantity = item.Quantity;
+                        orderDetail.Price = item.Product.Price;
+                        detail.InsertOrderNoLogin(orderDetail);
+
+                        total += (item.Product.Price * item.Quantity);
+                    }
+                    model.CustomerAddress = model.CustomerAddress;
+
+                    string content = System.IO.File.ReadAllText(Server.MapPath("~/content/client/template/neworder.html"));
+
+                    content = content.Replace("{{OrderID}}", orderNoLogin.ID.ToString());
+                    content = content.Replace("{{CustomerName}}", model.CustomerName);
+                    content = content.Replace("{{Phone}}", model.CustomerMobie);
+                    content = content.Replace("{{Address}}", model.CustomerAddress);
+                    content = content.Replace("{{Email}}", orderNoLogin.CustomerEmail);
+                    content = content.Replace("{{Total}}", total.ToString("N0"));
+                    content = content.Replace("{{OrderMethod}}", orderNoLogin.OrderMethod);
+
+                    new MailHelper().SendMail(orderNoLogin.CustomerEmail, "Đơn Hàng Pizza", content);
+
+                    Session["OrderID"] = orderNoLogin.ID;
+                }
+                catch (Exception)
+                {
+                    return Redirect("/dat-hang-that-bai");
+                }
+                return Redirect("/dat-hang-thanh-cong");
+            }
+        }
+
         [HttpGet]
         public ActionResult LoginForOrder()
         {

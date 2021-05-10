@@ -11,6 +11,8 @@ namespace FoodShopOnline.Models
     {
         public Product Product { get; set; }
         public int Quantity { get; set; }
+        public string Dough { get; set; }
+        public string Size { get; set; }
       
     }
 }

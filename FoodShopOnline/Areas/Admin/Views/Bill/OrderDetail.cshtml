@@ -2,33 +2,72 @@
 @{
     ViewBag.Title = "OrderDetail";
     Layout = "~/Areas/Admin/Views/Shared/_Layouts.cshtml";
+    var OrderInfo = (Model.EnityFramework.Order)ViewBag.OrderInfo;
 }
 @section header{
-    Chi Tiết Đơn Hàng
+    Chi Tiết Đơn Hàng #@OrderInfo.ID
 }
 <div class="card shadow mb-4">
     <div class="card-body">
-        <a class="btn btn-primary" href="/Admin/Bill/Index">Thông Tin Đơn hàng</a>
+        @*<a class="btn btn-primary" href="/Admin/Bill/Index">Thông Tin Đơn hàng</a>*@
+        <table class="table table-striped">
+            <tr>
+                <th>Mã đơn hàng</th>
+                <td>@OrderInfo.ID</td>
+            </tr>
+            <tr>
+                <th>Mã khách hàng</th>
+                <td>@OrderInfo.CustomerID</td>
+            </tr>
+            <tr>
+                <th>Tên khách hàng</th>
+                <td>@OrderInfo.CustomerName</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>@OrderInfo.CustomerEmail</td>
+            </tr>
+            <tr>
+                <th>Địa chỉ giao hàng</th>
+                <td>@OrderInfo.CustomerAddress</td>
+            </tr>
+            <tr>
+                <th>Điện thoại</th>
+                <td>@OrderInfo.CustomerMobile</td>
+            </tr>
+            <tr>
+                <th>Ngày đặt hàng</th>
+                <td>@OrderInfo.CreatedDate</td>
+            </tr>
+            <tr>
+                <th>Phương thức thanh toán</th>
+                <td>@OrderInfo.PaymentMethod</td>
+            </tr>
+            <tr>
+                <th>Trạng thái thanh toán</th>
+                <td>@OrderInfo.PaymentStatus</td>
+            </tr>
+        </table>
         <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
-                        <th>ProductID</th>
-                        <th>Name</th>
-                        <th>CategoryID</th>
-                        <th>Price</th>
-                        <th>Quantity</th>
-                        <th>Total</th>
+                        <th>MaSP</th>
+                        <th>TenSP</th>
+                        <th>HinhAnh</th>
+                        <th>Gia</th>
+                        <th>SoLuong</th>
+                        <th>Tong</th>
                     </tr>
                 </thead>
                 <tfoot>
                     <tr>
-                        <th>ProductID</th>
-                        <th>Name</th>
-                        <th>CategoryID</th>
-                        <th>Price</th>
-                        <th>Quantity</th>
-                        <th>Total</th>
+                        <th>MaSP</th>
+                        <th>TenSP</th>
+                        <th>HinhAnh</th>
+                        <th>Gia</th>
+                        <th>SoLuong</th>
+                        <th>Tong</th>
                     </tr>
                 </tfoot>
                 <tbody>
@@ -37,7 +76,7 @@
                         <tr>
                             <td>@item.OrderDetail.ProductID</td>
                             <td>@item.Product.Name</td>
-                            <td>@item.Product.CategoryID</td>
+                            <td><img src="@item.Product.Image" style="width: 70px; height: 70px" /></td>
                             <td>@item.Product.Price</td>
                             <td>@item.OrderDetail.Quantity</td>
                             <td>@item.OrderDetail.Price</td>
@@ -49,6 +88,9 @@
         </div>
     </div>
 </div>
+<p>
+    @Html.ActionLink("Quay lại", "Index")
+</p>
 
 
 

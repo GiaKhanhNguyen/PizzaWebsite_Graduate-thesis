@@ -23,6 +23,11 @@ namespace FoodShopOnline.Controllers
             ViewBag.RelateProducts = new ProductDAO().ListRelateProducts(id);
             return View();
         }
+
+        public ActionResult AddtoCart(int id)
+        {
+            return View();
+        }
      
     }
 }

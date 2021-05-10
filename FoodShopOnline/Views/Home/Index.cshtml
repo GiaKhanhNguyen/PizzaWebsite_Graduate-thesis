@@ -7,12 +7,27 @@
     var category = (List<Model.EnityFramework.ProductCategory>)ViewBag.category;
     var KM = (List<Model.EnityFramework.Product>)ViewBag.KM;
     var SP = (List<Model.EnityFramework.Product>)ViewBag.SP;
-    var KhaiVi = (List<Model.EnityFramework.Product>)ViewBag.KhaiVi;
+    var KhaiVi = (IEnumerable<Model.EnityFramework.Product>)ViewBag.KhaiVi;
+    var MyY = (IEnumerable<Model.EnityFramework.Product>)ViewBag.MyY;
+    var Com = (IEnumerable<Model.EnityFramework.Product>)ViewBag.Com;
+    var Salad = (IEnumerable<Model.EnityFramework.Product>)ViewBag.Salad;
+    var ThucUong = (IEnumerable<Model.EnityFramework.Product>)ViewBag.ThucUong;
 }
 @section jsFooter{
 
     <script src="~/content/client/controller/LoadMoreProduct.js"></script>
-    @*<script src="~/content/client/controller/LoadMoreKhaiVi.js"></script>*@
+    <script src="~/content/client/controller/LoadMoreKhaiVi.js"></script>
+    <script src="~/content/client/controller/LoadMoreMyY.js"></script>
+    <script src="~/content/client/controller/LoadMoreCom.js"></script>
+    <script src="~/content/client/controller/LoadMoreSalad.js"></script>
+    <script src="~/content/client/controller/LoadMoreThucUong.js"></script>
+    <script type="text/javascript">
+        $('#myModal').on('shown.bs.modal', function () {
+            $('#myInput').trigger('focus')
+        })
+    </script>
+    <link href="~/content/client/modal.css" rel="stylesheet" />
+    <link href="~/content/client/productcard.css" rel="stylesheet" />
 }
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
     <ol class="carousel-indicators">
@@ -77,12 +92,45 @@
                             </a>
                             <div class="desc">@x.Name</div>
                             <div class="info">@x.Description</div>
-                            <div class="gia">$@x.Price.ToString("N0")</div>
+                            <div class="gia">@x.Price.ToString("N0")</div>
                             <div class="add-actions">
                                 <ul class="add-actions-link btn btn-primary" style="background-color: #0062cc">
-                                    <li class="add-cart active" style="margin-left: 13px"><a href="/Cart/AddItem?productId=@x.ID&quantity=1" style="font-size: 15px"><span class="glyphicon glyphicon-shopping-cart"></span> THÊM VÀO GIỎ HÀNG</a></li>
-                                    @*<li class="add-cart active" style="margin-left: 13px"><a href="/ProductDetails/ProductDetail/@x.ID" style="font-size: 15px"><span class="glyphicon glyphicon-shopping-cart"></span> THÊM VÀO GIỎ HÀNG</a></li>*@
+                                    <li class="add-cart active" style="margin-left: 10px"><a data-toggle="modal" data-target="#myModal-@x.ID" style="font-size: 15px; border-radius: 5px"><span class="glyphicon glyphicon-shopping-cart"></span> THÊM VÀO GIỎ HÀNG</a></li>
                                 </ul>
+                            </div>
+                            <!-- Modal -->
+                            <div class="modal fade" id="myModal-@x.ID" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-lg" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            @*<h5 class="modal-title" id="exampleModalLabel" style="color: black">Modal title</h5>*@
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="product-img">
+                                                <img src="@x.Image" />
+                                            </div>
+                                            <div class="product-info">
+                                                <div class="product-text">
+                                                    <h1>@x.Name</h1>
+                                                    <p>@x.Description</p>
+                                                    <div class="form-group">
+                                                        <p style="float: left; font-weight: bold">Ghi chú</p> <br />
+                                                        <textarea id="txtContent" class="form-group" placeholder="Nhập ghi chú của bạn tại đây" style="width: 350px; height: 70px; font-size: 15px; padding-left: 10px; padding-right: 10px; color: #474747"></textarea>
+                                                    </div>
+                                                    <ul class="add-to-cart">
+                                                        <li class="add-cart active" style="background-color: #04354c"><a href="/Cart/AddItem?productId=@x.ID&quantity=1" style="background-color:#04354c "><span class="glyphicon glyphicon-shopping-cart"></span> THÊM VÀO GIỎ HÀNG</a></li>
+                                                    </ul>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -91,17 +139,17 @@
             }
         </div>
     </div>
+    <p>Thực Đơn &nbsp; &nbsp; &nbsp; </p>
+    <hr>
+
     @foreach (var item in Model.Batch(4))
     {
-
-        <p>Thực Đơn &nbsp; &nbsp; &nbsp; </p>
-        <hr>
         <p>Pizza &nbsp; &nbsp; &nbsp; </p>
         <div class="row">
             <div class="col-md-12">
                 @foreach (var subitem in item)
                 {
-                    if (subitem.CategoryID == 1 && subitem.Status == true)
+                    if (subitem.Status == true)
                     {
                         <div class="responsive">
                             <div class="gallery">
@@ -110,11 +158,89 @@
                                 </a>
                                 <div class="desc">@subitem.Name</div>
                                 <div class="info">@subitem.Description</div>
-                                <div class="gia">$@subitem.Price.ToString("N0")</div>
+                                <div class="gia">@subitem.Price.ToString("N0") đ</div>
                                 <div class="add-actions">
                                     <ul class="add-actions-link btn btn-primary" style="background-color: #0062cc">
-                                        <li class="add-cart active" style="margin-left: 13px"><a href="/Cart/AddItem?productId=@subitem.ID&quantity=1" style="font-size: 15px"><span class="glyphicon glyphicon-shopping-cart"></span> THÊM VÀO GIỎ HÀNG</a></li>
+                                        <li class="add-cart active" style="margin-left: 10px"><a data-toggle="modal" data-target="#myModal-@subitem.ID" style="font-size: 15px; border-radius: 5px"><span class="glyphicon glyphicon-shopping-cart"></span> THÊM VÀO GIỎ HÀNG</a></li>
                                     </ul>
+                                </div>
+                                <!-- Modal -->
+                                <div class="modal fade" id="myModal-@subitem.ID" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="background-color: red">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            @using (Html.BeginForm("Index", "Home", FormMethod.Get))
+                                            {
+                                                <div class="modal-body">
+                                                    <div class="product-img">
+                                                        <img src="@subitem.Image" />
+                                                        <div class="gia">@subitem.Price.ToString("N0") đ</div>
+                                                    </div>
+                                                    <div class="product-info">
+                                                        <div class="product-text">
+                                                            <h1>@subitem.Name</h1>
+                                                            <p>@subitem.Description</p>
+                                                            <div class="form-group">
+                                                                <p style="float: left; font-weight: bold">Chọn đế bánh</p> <br />
+                                                                <div style="float: left">
+                                                                    <a style="color: #474747; float: left; margin-top: 5px">
+                                                                        <input type="radio" id="deday" name="de" value="day" />
+                                                                        Đế dày xốp
+                                                                    </a><br />
+                                                                    <a style="color: #474747; float: left; margin-top: 5px">
+                                                                        <input type="radio" id="demong" name="de" value="mong" checked />
+                                                                        Đế mỏng giòn
+                                                                    </a><br />
+                                                                    <a style="color: #474747; float: left; margin-top: 5px">
+                                                                        <input type="radio" id="devua" name="de" value="vua" />
+                                                                        Đế vừa
+                                                                    </a><br />
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <p style="float: left; font-weight: bold">Chọn cỡ bánh</p> <br />
+                                                                <div style="float: left">
+                                                                    <br />
+                                                                    <a style="color: #474747; float: left; margin-top: 5px">
+                                                                        <input type="radio" id="7inch" name="size" value="7" />
+                                                                        Cỡ 7 inch
+                                                                    </a><br />
+                                                                    <a style="color: #474747; float: left; margin-top: 5px">
+                                                                        <input type="radio" id="9inch" name="size" value="9" checked />
+                                                                        Cỡ 9 inch
+                                                                    </a><br />
+                                                                    <a style="color: #474747; float: left; margin-top: 5px">
+                                                                        <input type="radio" id="12inch" name="size" value="12" />
+                                                                        Cỡ 12 inch
+                                                                    </a><br />
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <br />
+                                                                <br />
+                                                                <br />
+                                                                <br />
+                                                                <br />
+                                                                <br />
+                                                                <br />
+                                                                <p style="float: left; font-weight: bold">Ghi chú</p> <br />
+                                                                <textarea id="txtContent" class="form-group" placeholder="Nhập ghi chú của bạn tại đây" style="width: 350px; height: 70px; font-size: 15px; padding-left: 10px; padding-right: 10px; color: #474747"></textarea>
+                                                            </div>
+                                                            <ul class="add-to-cart">
+                                                                <li class="add-cart active" style="background-color: #04354c"><a href="/Cart/AddItem?productId=@subitem.ID&quantity=1" style="background-color:#04354c "><span class="glyphicon glyphicon-shopping-cart"></span> THÊM VÀO GIỎ HÀNG</a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            }
+                                            <div class="modal-footer">
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -127,16 +253,14 @@
     <br />
     <p id="loadMore" style="text-align: center;">
 
-        <a class="btn btn-outline-primary">
+        <a class="btn btn-outline-primary" style="width: 100%">
             Xem Thêm +
         </a>
 
     </p>
-
     <div class="clearfix"></div>
     <div style="padding:6px;"></div>
-</div>
-    @*@foreach (var item in Model.Batch(4))
+    @foreach (var item in KhaiVi.Batch(4))
     {
         <hr>
         <p>Khai Vị&nbsp; &nbsp; &nbsp; </p>
@@ -144,7 +268,7 @@
             <div class="col-md-12">
                 @foreach (var subitem in item)
                 {
-                    if (subitem.CategoryID == 2 && subitem.Status == true)
+                    if (subitem.Status == true)
                     {
                         <div class="responsive">
                             <div class="gallery">
@@ -153,11 +277,44 @@
                                 </a>
                                 <div class="desc">@subitem.Name</div>
                                 <div class="info">@subitem.Description</div>
-                                <div class="gia">$@subitem.Price.ToString("N0")</div>
+                                <div class="gia">@subitem.Price.ToString("N0") đ</div>
                                 <div class="add-actions">
                                     <ul class="add-actions-link btn btn-primary" style="background-color: #0062cc">
-                                        <li class="add-cart active" style="margin-left: 13px"><a href="/Cart/AddItem?productId=@subitem.ID&quantity=1" style="font-size: 15px"><span class="glyphicon glyphicon-shopping-cart"></span> THÊM VÀO GIỎ HÀNG</a></li>
+                                        <li class="add-cart active" style="margin-left: 10px"><a data-toggle="modal" data-target="#myModal-@subitem.ID" style="font-size: 15px; border-radius: 5px"><span class="glyphicon glyphicon-shopping-cart"></span> THÊM VÀO GIỎ HÀNG</a></li>
                                     </ul>
+                                </div>
+                                <!-- Modal -->
+                                <div class="modal fade" id="myModal-@subitem.ID" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="background-color: red">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="product-img">
+                                                    <img src="@subitem.Image" />
+                                                </div>
+                                                <div class="product-info">
+                                                    <div class="product-text">
+                                                        <h1>@subitem.Name</h1>
+                                                        <p>@subitem.Description</p>
+                                                        <div class="form-group">
+                                                            <p style="float: left; font-weight: bold">Ghi chú</p> <br />
+                                                            <textarea id="txtContent" class="form-group" placeholder="Nhập ghi chú của bạn tại đây" style="width: 350px; height: 70px; font-size: 15px; padding-left: 10px; padding-right: 10px; color: #474747"></textarea>
+                                                        </div>
+                                                        <ul class="add-to-cart">
+                                                            <li class="add-cart active" style="background-color: #04354c"><a href="/Cart/AddItem?productId=@subitem.ID&quantity=1" style="background-color:#04354c "><span class="glyphicon glyphicon-shopping-cart"></span> THÊM VÀO GIỎ HÀNG</a></li>
+                                                        </ul>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -170,9 +327,336 @@
     <br />
     <p id="loadMoreKhaiVi" style="text-align: center;">
 
-        <a class="btn btn-outline-primary">
+        <a class="btn btn-outline-primary" style="width: 100%">
             Xem Thêm +
         </a>
 
     </p>
-</div>*@
+    <div class="clearfix"></div>
+    <div style="padding:6px;"></div>
+    @foreach (var item in MyY.Batch(4))
+    {
+        <hr>
+        <p>Mỳ Ý&nbsp; &nbsp; &nbsp; </p>
+        <div class="row">
+            <div class="col-md-12">
+                @foreach (var subitem in item)
+                {
+                    if (subitem.Status == true)
+                    {
+                        <div class="responsive">
+                            <div class="gallery">
+                                <a href="/chi-tiet/@subitem.Alias-@subitem.ID">
+                                    <img src="@subitem.Image">
+                                </a>
+                                <div class="desc">@subitem.Name</div>
+                                <div class="info">@subitem.Description</div>
+                                <div class="gia">@subitem.Price.ToString("N0") đ</div>
+                                @*<div class="add-actions">
+                                        <ul class="add-actions-link btn btn-primary" style="background-color: #0062cc">
+                                            <li class="add-cart active" style="margin-left: 10px"><a href="/Cart/AddItem?productId=@subitem.ID&quantity=1" style="font-size: 15px; border-radius: 5px"><span class="glyphicon glyphicon-shopping-cart"></span> THÊM VÀO GIỎ HÀNG</a></li>
+                                        </ul>
+                                    </div>*@
+                                <div class="add-actions">
+                                    <ul class="add-actions-link btn btn-primary" style="background-color: #0062cc">
+                                        @*<li class="add-cart active" style="margin-left: 13px"><a href="/Cart/AddItem?productId=@x.ID&quantity=1" style="font-size: 15px"><span class="glyphicon glyphicon-shopping-cart"></span> THÊM VÀO GIỎ HÀNG</a></li>*@
+                                        <li class="add-cart active" style="margin-left: 10px"><a data-toggle="modal" data-target="#myModal-@subitem.ID" style="font-size: 15px; border-radius: 5px"><span class="glyphicon glyphicon-shopping-cart"></span> THÊM VÀO GIỎ HÀNG</a></li>
+                                    </ul>
+                                </div>
+                                <!-- Modal -->
+                                <div class="modal fade" id="myModal-@subitem.ID" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                @*<h5 class="modal-title" id="exampleModalLabel" style="color: black">Modal title</h5>*@
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="background-color: red">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="product-img">
+                                                    <img src="@subitem.Image" />
+                                                </div>
+                                                <div class="product-info">
+                                                    <div class="product-text">
+                                                        <h1>@subitem.Name</h1>
+                                                        <p>@subitem.Description</p>
+                                                        <div class="form-group">
+                                                            <p style="float: left; font-weight: bold">Ghi chú</p> <br />
+                                                            <textarea id="txtContent" class="form-group" placeholder="Nhập ghi chú của bạn tại đây" style="width: 350px; height: 70px; font-size: 15px; padding-left: 10px; padding-right: 10px; color: #474747"></textarea>
+                                                        </div>
+                                                        <ul class="add-to-cart">
+                                                            <li class="add-cart active" style="background-color: #04354c"><a href="/Cart/AddItem?productId=@subitem.ID&quantity=1" style="background-color:#04354c "><span class="glyphicon glyphicon-shopping-cart"></span> THÊM VÀO GIỎ HÀNG</a></li>
+                                                        </ul>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                }
+            </div>
+        </div>
+    }
+    <br />
+    <p id="LoadMoreMyY" style="text-align: center;">
+
+        <a class="btn btn-outline-primary" style="width: 100%">
+            Xem Thêm +
+        </a>
+
+    </p>
+    <div class="clearfix"></div>
+    <div style="padding:6px;"></div>
+
+    @foreach (var item in Com.Batch(4))
+    {
+        <hr>
+        <p>Cơm&nbsp; &nbsp; &nbsp; </p>
+        <div class="row">
+            <div class="col-md-12">
+                @foreach (var subitem in item)
+                {
+                    if (subitem.Status == true)
+                    {
+                        <div class="responsive">
+                            <div class="gallery">
+                                <a href="/chi-tiet/@subitem.Alias-@subitem.ID">
+                                    <img src="@subitem.Image">
+                                </a>
+                                <div class="desc">@subitem.Name</div>
+                                <div class="info">@subitem.Description</div>
+                                <div class="gia">@subitem.Price.ToString("N0") đ</div>
+                                @*<div class="add-actions">
+                                        <ul class="add-actions-link btn btn-primary" style="background-color: #0062cc">
+                                            <li class="add-cart active" style="margin-left: 10px"><a href="/Cart/AddItem?productId=@subitem.ID&quantity=1" style="font-size: 15px; border-radius: 5px"><span class="glyphicon glyphicon-shopping-cart"></span> THÊM VÀO GIỎ HÀNG</a></li>
+                                        </ul>
+                                    </div>*@
+                                <div class="add-actions">
+                                    <ul class="add-actions-link btn btn-primary" style="background-color: #0062cc">
+                                        @*<li class="add-cart active" style="margin-left: 13px"><a href="/Cart/AddItem?productId=@x.ID&quantity=1" style="font-size: 15px"><span class="glyphicon glyphicon-shopping-cart"></span> THÊM VÀO GIỎ HÀNG</a></li>*@
+                                        <li class="add-cart active" style="margin-left: 10px"><a data-toggle="modal" data-target="#myModal-@subitem.ID" style="font-size: 15px; border-radius: 5px"><span class="glyphicon glyphicon-shopping-cart"></span> THÊM VÀO GIỎ HÀNG</a></li>
+                                    </ul>
+                                </div>
+                                <!-- Modal -->
+                                <div class="modal fade" id="myModal-@subitem.ID" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                @*<h5 class="modal-title" id="exampleModalLabel" style="color: black">Modal title</h5>*@
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="background-color: red">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="product-img">
+                                                    <img src="@subitem.Image" />
+                                                </div>
+                                                <div class="product-info">
+                                                    <div class="product-text">
+                                                        <h1>@subitem.Name</h1>
+                                                        <p>@subitem.Description</p>
+                                                        <div class="form-group">
+                                                            <p style="float: left; font-weight: bold">Ghi chú</p> <br />
+                                                            <textarea id="txtContent" class="form-group" placeholder="Nhập ghi chú của bạn tại đây" style="width: 350px; height: 70px; font-size: 15px; padding-left: 10px; padding-right: 10px; color: #474747"></textarea>
+                                                        </div>
+                                                        <ul class="add-to-cart">
+                                                            <li class="add-cart active" style="background-color: #04354c"><a href="/Cart/AddItem?productId=@subitem.ID&quantity=1" style="background-color:#04354c "><span class="glyphicon glyphicon-shopping-cart"></span> THÊM VÀO GIỎ HÀNG</a></li>
+                                                        </ul>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                }
+            </div>
+        </div>
+    }
+    <br />
+    <p id="LoadMoreCom" style="text-align: center;">
+
+        <a class="btn btn-outline-primary" style="width: 100%">
+            Xem Thêm +
+        </a>
+
+    </p>
+    <div class="clearfix"></div>
+    <div style="padding:6px;"></div>
+    @foreach (var item in Salad.Batch(4))
+    {
+        <hr>
+        <p>Salad&nbsp; &nbsp; &nbsp; </p>
+        <div class="row">
+            <div class="col-md-12">
+                @foreach (var subitem in item)
+                {
+                    if (subitem.Status == true)
+                    {
+                        <div class="responsive">
+                            <div class="gallery">
+                                <a href="/chi-tiet/@subitem.Alias-@subitem.ID">
+                                    <img src="@subitem.Image">
+                                </a>
+                                <div class="desc">@subitem.Name</div>
+                                <div class="info">@subitem.Description</div>
+                                <div class="gia">@subitem.Price.ToString("N0") đ</div>
+                                @*<div class="add-actions">
+                                        <ul class="add-actions-link btn btn-primary" style="background-color: #0062cc">
+                                            <li class="add-cart active" style="margin-left: 10px"><a href="/Cart/AddItem?productId=@subitem.ID&quantity=1" style="font-size: 15px; border-radius: 5px"><span class="glyphicon glyphicon-shopping-cart"></span> THÊM VÀO GIỎ HÀNG</a></li>
+                                        </ul>
+                                    </div>*@
+                                <div class="add-actions">
+                                    <ul class="add-actions-link btn btn-primary" style="background-color: #0062cc">
+                                        @*<li class="add-cart active" style="margin-left: 13px"><a href="/Cart/AddItem?productId=@x.ID&quantity=1" style="font-size: 15px"><span class="glyphicon glyphicon-shopping-cart"></span> THÊM VÀO GIỎ HÀNG</a></li>*@
+                                        <li class="add-cart active" style="margin-left: 10px"><a data-toggle="modal" data-target="#myModal-@subitem.ID" style="font-size: 15px; border-radius: 5px"><span class="glyphicon glyphicon-shopping-cart"></span> THÊM VÀO GIỎ HÀNG</a></li>
+                                    </ul>
+                                </div>
+                                <!-- Modal -->
+                                <div class="modal fade" id="myModal-@subitem.ID" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                @*<h5 class="modal-title" id="exampleModalLabel" style="color: black">Modal title</h5>*@
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="background-color: red">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="product-img">
+                                                    <img src="@subitem.Image" />
+                                                </div>
+                                                <div class="product-info">
+                                                    <div class="product-text">
+                                                        <h1>@subitem.Name</h1>
+                                                        <p>@subitem.Description</p>
+                                                        <div class="form-group">
+                                                            <p style="float: left; font-weight: bold">Ghi chú</p> <br />
+                                                            <textarea id="txtContent" class="form-group" placeholder="Nhập ghi chú của bạn tại đây" style="width: 350px; height: 70px; font-size: 15px; padding-left: 10px; padding-right: 10px; color: #474747"></textarea>
+                                                        </div>
+                                                        <ul class="add-to-cart">
+                                                            <li class="add-cart active" style="background-color: #04354c"><a href="/Cart/AddItem?productId=@subitem.ID&quantity=1" style="background-color:#04354c "><span class="glyphicon glyphicon-shopping-cart"></span> THÊM VÀO GIỎ HÀNG</a></li>
+                                                        </ul>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                }
+            </div>
+        </div>
+    }
+    <br />
+    <p id="LoadMoreSalad" style="text-align: center;">
+
+        <a class="btn btn-outline-primary" style="width: 100%">
+            Xem Thêm +
+        </a>
+
+    </p>
+    <div class="clearfix"></div>
+    <div style="padding:6px;"></div>
+    @foreach (var item in ThucUong.Batch(4))
+    {
+        <hr>
+        <p>Thức Uống&nbsp; &nbsp; &nbsp; </p>
+        <div class="row">
+            <div class="col-md-12">
+                @foreach (var subitem in item)
+                {
+                    if (subitem.Status == true)
+                    {
+                        <div class="responsive">
+                            <div class="gallery">
+                                <a href="/chi-tiet/@subitem.Alias-@subitem.ID">
+                                    <img src="@subitem.Image">
+                                </a>
+                                <div class="desc">@subitem.Name</div>
+                                <div class="info">@subitem.Description</div>
+                                <div class="gia">@subitem.Price.ToString("N0") đ</div>
+                                @*<div class="add-actions">
+                                        <ul class="add-actions-link btn btn-primary" style="background-color: #0062cc">
+                                            <li class="add-cart active" style="margin-left: 10px"><a href="/Cart/AddItem?productId=@subitem.ID&quantity=1" style="font-size: 15px; border-radius: 5px"><span class="glyphicon glyphicon-shopping-cart"></span> THÊM VÀO GIỎ HÀNG</a></li>
+                                        </ul>
+                                    </div>*@
+                                <div class="add-actions">
+                                    <ul class="add-actions-link btn btn-primary" style="background-color: #0062cc">
+                                        @*<li class="add-cart active" style="margin-left: 13px"><a href="/Cart/AddItem?productId=@x.ID&quantity=1" style="font-size: 15px"><span class="glyphicon glyphicon-shopping-cart"></span> THÊM VÀO GIỎ HÀNG</a></li>*@
+                                        <li class="add-cart active" style="margin-left: 10px"><a data-toggle="modal" data-target="#myModal-@subitem.ID" style="font-size: 15px; border-radius: 5px"><span class="glyphicon glyphicon-shopping-cart"></span> THÊM VÀO GIỎ HÀNG</a></li>
+                                    </ul>
+                                </div>
+                                <!-- Modal -->
+                                <div class="modal fade" id="myModal-@subitem.ID" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                @*<h5 class="modal-title" id="exampleModalLabel" style="color: black">Modal title</h5>*@
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="background-color: red">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="product-img">
+                                                    <img src="@subitem.Image" />
+                                                </div>
+                                                <div class="product-info">
+                                                    <div class="product-text">
+                                                        <h1>@subitem.Name</h1>
+                                                        <p>@subitem.Description</p>
+                                                        <div class="form-group">
+                                                            <p style="float: left; font-weight: bold">Ghi chú</p> <br />
+                                                            <textarea id="txtContent" class="form-group" placeholder="Nhập ghi chú của bạn tại đây" style="width: 350px; height: 70px; font-size: 15px; padding-left: 10px; padding-right: 10px; color: #474747"></textarea>
+                                                        </div>
+                                                        <ul class="add-to-cart">
+                                                            <li class="add-cart active" style="background-color: #04354c"><a href="/Cart/AddItem?productId=@subitem.ID&quantity=1" style="background-color:#04354c "><span class="glyphicon glyphicon-shopping-cart"></span> THÊM VÀO GIỎ HÀNG</a></li>
+                                                        </ul>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                }
+            </div>
+        </div>
+    }
+    <br />
+    <p id="LoadMoreThucUong" style="text-align: center;">
+
+        <a class="btn btn-outline-primary" style="width: 100%">
+            Xem Thêm +
+        </a>
+
+    </p>
+    <div class="clearfix"></div>
+    <div style="padding:6px;"></div>
+</div>

@@ -2836,8 +2836,12 @@
     <Content Include="content\client\bootstrap-social.css" />
     <Content Include="content\client\controller\CartController.js" />
     <Content Include="content\client\controller\contactController.js" />
+    <Content Include="content\client\controller\LoadMoreCom.js" />
     <Content Include="content\client\controller\LoadMoreKhaiVi.js" />
+    <Content Include="content\client\controller\LoadMoreMyY.js" />
     <Content Include="content\client\controller\LoadMoreProduct.js" />
+    <Content Include="content\client\controller\LoadMoreSalad.js" />
+    <Content Include="content\client\controller\LoadMoreThucUong.js" />
     <Content Include="content\client\controller\paymentController.js" />
     <Content Include="content\client\dndk.css" />
     <Content Include="content\client\dndkv2.css" />
@@ -2936,7 +2940,9 @@
     <Content Include="content\client\info.css" />
     <Content Include="content\client\info2.css" />
     <Content Include="content\client\khuyenmai.css" />
+    <Content Include="content\client\modal.css" />
     <Content Include="content\client\owl.carousel.min.css" />
+    <Content Include="content\client\productcard.css" />
     <Content Include="content\client\template\neworder.html" />
     <Content Include="content\PagedList.css" />
     <Content Include="Data\Avatar\user.png" />
@@ -3234,6 +3240,10 @@
     <Content Include="Views\Order\OldOrder.cshtml" />
     <Content Include="Views\Cart\TakeAwayOrder.cshtml" />
     <Content Include="Views\Cart\LoginForOrder.cshtml" />
+    <Content Include="Views\Home\LoadMoreMyY.cshtml" />
+    <Content Include="Views\Home\LoadMoreCom.cshtml" />
+    <Content Include="Views\Home\LoadMoreSalad.cshtml" />
+    <Content Include="Views\Home\LoadMoreThucUong.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

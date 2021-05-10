@@ -1,4 +1,5 @@
-﻿using Model.EnityFramework;
+﻿using FoodShopOnline.Common;
+using Model.EnityFramework;
 using Model.Func;
 using System;
 using System.Collections.Generic;
@@ -12,12 +13,41 @@ namespace FoodShopOnline.Controllers
     {
         private FoodShopOnlineDBContext db = new FoodShopOnlineDBContext();
         // GET: Category
-        public ActionResult Index(int id)
+        public ActionResult Index(int id, string de, string size)
         {
             var category = new ProductCategoryDAO().ViewDetail(id);
             ViewBag.Category = category;
             var model = new ProductDAO().ListByCategoryID(id);
             return View(model);
+        }
+        [HttpPost]
+        public ActionResult Index(string de, string size)
+        {
+            if (de == "day")
+            {
+                Session[CommonConstants.DoughKind] = "Dày xốp";
+            }
+            else if (de == "mong")
+            {
+                Session[CommonConstants.DoughKind] = "vừa";
+            }
+            else
+            {
+                Session[CommonConstants.DoughKind] = "Mỏng giòn";
+            }
+            if (size == "7")
+            {
+                Session[CommonConstants.SizeProduct] = "Nhỏ 7''";
+            }
+            else if (size == "9")
+            {
+                Session[CommonConstants.SizeProduct] = "Lớn 12''";
+            }
+            else
+            {
+                Session[CommonConstants.SizeProduct] = "Vừa 9''";
+            }
+            return View();
         }
         [ChildActionOnly]
         public PartialViewResult ProductCategory()

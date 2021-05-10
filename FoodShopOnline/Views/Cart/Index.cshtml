@@ -11,15 +11,14 @@
     <script src="~/content/client/controller/CartController.js"></script>
 }
 @*@foreach(var item in Model)
-{
-    quantity = item.Quantity + quantity;
-}
+    {
+        quantity = item.Quantity + quantity;
+    }
 
-<p>Giỏ Hàng: <span style="color:#d30e15"> @quantity sản phẩm
-    </span>
-    </p>
-<div class="hr"><hr></div>*@
-
+    <p>Giỏ Hàng: <span style="color:#d30e15"> @quantity sản phẩm
+        </span>
+        </p>
+    <div class="hr"><hr></div>*@
 <div class="content" style="padding-right: 100px">
     <div class="section group">
         @if (Model.Count > 0)
@@ -39,11 +38,17 @@
                     @foreach (var item in Model)
                     {
                         <tr>
-                            @*<td>@item.Product.ID</td>*@
-                            <td>@item.Product.Name</td>
+                            <td>
+                                @item.Product.Name <br />
+                                @if (item.Product.CategoryID == 1)
+                                {
+                                    <span style="font-size: 12px">Kích thước - @item.Size</span> <br />
+                                    <span style="font-size: 12px">Đế - @item.Dough</span>
+
+                                }
+                            </td>
                             <td><img src="@item.Product.Image" width="100" /></td>
                             <td><input type="text" class="txtQuantity" data-id="@item.Product.ID" value="@item.Quantity" /></td>
-                            @*<td><input type="checkbox" checked/> Dày</td>*@
                             <td>@item.Product.Price.ToString("N0")</td>
                             <td>@((item.Product.Price * item.Quantity).ToString("N0"))</td>
                             <td><a href="#" class="btn-delete" data-id="@item.Product.ID"><i class="fas fa-trash-alt"></i></a></td>

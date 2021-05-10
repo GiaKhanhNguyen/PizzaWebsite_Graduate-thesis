@@ -24,10 +24,10 @@ else
                     </a>
                     <div class="desc">@item.Name</div>
                     <div class="info">@item.Description</div>
-                    <div class="gia">@item.Price.ToString("N0")</div>
+                    <div class="gia">@item.Price.ToString("N0") đ</div>
                     <div class="add-actions">
                         <ul class="add-actions-link btn btn-primary" style="background-color: #0062cc">
-                            <li class="add-cart active" style="margin-left: 13px"><a href="/Cart/AddItem?productId=@item.ID&quantity=1" style="font-size: 15px"><span class="glyphicon glyphicon-shopping-cart"></span> THÊM VÀO GIỎ HÀNG</a></li>
+                            <li class="add-cart active" style="margin-left: 13px"><a href="/Cart/AddItem?productId=@item.ID&quantity=1" style="font-size: 15px; border-radius: 5px"><span class="glyphicon glyphicon-shopping-cart"></span> THÊM VÀO GIỎ HÀNG</a></li>
                         </ul>
                     </div>
                 </div>

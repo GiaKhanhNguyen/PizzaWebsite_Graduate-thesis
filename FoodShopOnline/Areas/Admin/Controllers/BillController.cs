@@ -30,6 +30,7 @@ namespace FoodShopOnline.Areas.Admin.Controllers
         public ActionResult OrderDetail(int id)
         {
             var model = new OrderDAO().GetOrderDetailByID(id);
+            ViewBag.OrderInfo = new OrderDAO().GetOrderByID(id);
             return View(model);
         }
         //Xác nhận đơn hàng: Đặt giao hàng

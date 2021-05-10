@@ -30,7 +30,7 @@
                     <tr>
                         <th>ID</th>
                         <th>TênKH</th>
-                        <th>Diachi</th>
+                        @*<th>Diachi</th>*@
                         <th>Dienthoai</th>
                         <th>TongHoaDon</th>
                         <th>NgayMua</th>
@@ -50,16 +50,16 @@
                         <tr id="row_@item.ID">
                             <td>@item.ID</td>
                             <td>@item.CustomerName</td>
-                            <td>@item.CustomerAddress</td>
+                            @*<td>@item.CustomerAddress</td>*@
                             <td>@item.CustomerMobile</td>
                             <td>@item.Total.ToString("N0")</td>
                             <td>@item.CreatedDate</td>
                             <td>@item.PaymentMethod</td>
                             <td>@item.PaymentStatus</td>
                             <td>@item.Status</td>
-                            <td>
+                            <td style="width: 205px">
                                 @Html.ActionLink("Xác nhận", "XacNhanHoaDon", new { id = item.ID })
-                                | <br />
+                                |
                                 @Html.ActionLink(" Chi Tiết", "OrderDetail", new { id = item.ID })
                                 |
                                 @Ajax.ActionLink("Huỷ", "DeleteDeliveryOrder", new { @id = item.ID }, new AjaxOptions
@@ -83,7 +83,7 @@
                     <tr>
                         <th>ID</th>
                         <th>TênKH</th>
-                        <th>Diachi</th>
+                        @*<th>Diachi</th>*@
                         <th>Dienthoai</th>
                         <th>TongHoaDon</th>
                         <th>NgayMua</th>
@@ -104,14 +104,14 @@
                         <tr id="row_@item.ID">
                             <td>@item.ID</td>
                             <td>@item.CustomerName</td>
-                            <td>@item.CustomerAddress</td>
+                            @*<td>@item.CustomerAddress</td>*@
                             <td>@item.CustomerMobile</td>
                             <td>@item.Total.ToString("N0")</td>
                             <td>@item.CreatedDate</td>
                             <td>@item.PaymentMethod</td>
                             <td>@item.PaymentStatus</td>
                             <td>@item.Status</td>
-                            <td>
+                            <td style="width: 170px">
                                 @Html.ActionLink("Xác nhận đã giao hàng", "XacNhanGiaoHang", new { id = item.ID }) @*|
                                     @Html.ActionLink("Huỷ", "Delete", new { id = item.ID })*@
                             </td>
@@ -129,7 +129,7 @@
                     <tr>
                         <th>ID</th>
                         <th>TênKH</th>
-                        <th>Diachi</th>
+                        @*<th>Diachi</th>*@
                         <th>Dienthoai</th>
                         <th>TongHoaDon</th>
                         <th>NgayMua</th>
@@ -149,14 +149,14 @@
                         <tr id="row_@item.ID">
                             <td>@item.ID</td>
                             <td>@item.CustomerName</td>
-                            <td>@item.CustomerAddress</td>
+                            @*<td>@item.CustomerAddress</td>*@
                             <td>@item.CustomerMobile</td>
                             <td>@item.Total.ToString("N0")</td>
                             <td>@item.CreatedDate</td>
                             <td>@item.PaymentMethod</td>
                             <td>@item.PaymentStatus</td>
                             <td>@item.Status</td>
-                            <td>
+                            <td style="width: 50px">
                                 @Html.ActionLink(" Chi Tiết", "OrderDetail", new { id = item.ID })
                             </td>
                         </tr>
