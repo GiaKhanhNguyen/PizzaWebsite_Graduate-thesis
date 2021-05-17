@@ -21,7 +21,8 @@ namespace Model.EnityFramework
         public decimal Price { get; set; }
 
         public int Quantity { get; set; }
-
+        public string Dough { get; set; }
+        public string Size { get; set; }
         public virtual Order Order { get; set; }
 
         public virtual Product Product { get; set; }

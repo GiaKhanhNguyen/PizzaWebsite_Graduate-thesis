@@ -60,7 +60,15 @@
                                                         {
                                                             <tr>
                                                                 @*<td>@item.Product.ID</td>*@
-                                                                <td>@item.Product.Name</td>
+                                                                <td>
+                                                                    @item.Product.Name <br />
+                                                                    @if (item.Product.CategoryID == 1)
+                                                                    {
+                                                                        <span style="font-size: 12px">Kích thước - @item.OrderDetail.Size</span> <br />
+                                                                        <span style="font-size: 12px">Đế - @item.OrderDetail.Dough</span>
+
+                                                                    }
+                                                                </td>
                                                                 <td><img src="@item.Product.Image" width="100" /></td>
                                                                 <td><input type="text" class="txtQuantity" data-id="@item.Product.ID" value="x @item.OrderDetail.Quantity" disabled /></td>
                                                                 @*<td><input type="checkbox" checked/> Dày</td>*@

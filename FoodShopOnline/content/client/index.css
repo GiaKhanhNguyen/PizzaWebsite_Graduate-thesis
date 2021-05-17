@@ -244,11 +244,11 @@ p2{
 }
 
 .pizza hr{ 
-    border: 8px dotted #04354c;
+    border: 8px  #04354c;
     border-style: none none dotted;
 }
 .hr hr{
-    border: 8px dotted #04354c;
+    border: 8px  #04354c;
     border-style: none none dotted;
 }
 .wordfoot p{

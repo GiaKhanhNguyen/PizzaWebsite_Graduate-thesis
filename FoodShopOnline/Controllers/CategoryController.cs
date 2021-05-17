@@ -13,11 +13,20 @@ namespace FoodShopOnline.Controllers
     {
         private FoodShopOnlineDBContext db = new FoodShopOnlineDBContext();
         // GET: Category
-        public ActionResult Index(int id, string de, string size)
+        [HttpGet]
+        public ActionResult Index(int id, string sort)
         {
             var category = new ProductCategoryDAO().ViewDetail(id);
             ViewBag.Category = category;
             var model = new ProductDAO().ListByCategoryID(id);
+            if(sort == "1")
+            {
+                model.OrderBy(x => x.Price);
+            }
+            else
+            {
+                model.OrderByDescending(x => x.Price);
+            }
             return View(model);
         }
         [HttpPost]

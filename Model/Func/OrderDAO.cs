@@ -20,7 +20,7 @@ namespace Model.Func
         {
             db = new FoodShopOnlineDBContext();
         }
-        //hàm order sản phẩm vào database sử dụng Stored Procedure
+        //hàm order sản phẩm vào database
         public void Insert(Order order)
         {
             db.Orders.Add(order);
@@ -36,7 +36,7 @@ namespace Model.Func
         }
         public List<Order> ListOrder()
         {
-            return db.Orders.OrderBy(x=>x.ID).ToList();
+            return db.Orders.OrderByDescending(x=>x.ID).ToList();
         }
         public List<Order> ListOrderTakeAway()
         {
@@ -87,7 +87,7 @@ namespace Model.Func
                                 OrderDetail = b,
                                 Product = c
                             });
-            return oldOrder.ToList();
+            return oldOrder.OrderByDescending(x=>x.Order.ID).ToList();
         }
         public List<ReportBenefit> ReportBenefit()
         {

@@ -4,6 +4,10 @@
     ViewBag.Title = "Search";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@section jsFooter{
+    <link href="~/content/client/productcard.css" rel="stylesheet" />
+    <link href="~/content/client/modal.css" rel="stylesheet" />
+}
 @if (Model.Count < 1)
 {
     //<h1>404</h1>
@@ -27,9 +31,126 @@ else
                     <div class="gia">@item.Price.ToString("N0") đ</div>
                     <div class="add-actions">
                         <ul class="add-actions-link btn btn-primary" style="background-color: #0062cc">
-                            <li class="add-cart active" style="margin-left: 13px"><a href="/Cart/AddItem?productId=@item.ID&quantity=1" style="font-size: 15px; border-radius: 5px"><span class="glyphicon glyphicon-shopping-cart"></span> THÊM VÀO GIỎ HÀNG</a></li>
+                            <li class="add-cart active" style="margin-left: 10px"><a data-toggle="modal" data-target="#myModal-@item.ID" style="font-size: 15px; border-radius: 5px"><span class="glyphicon glyphicon-shopping-cart"></span> THÊM VÀO GIỎ HÀNG</a></li>
                         </ul>
                     </div>
+                    @if (item.CategoryID == 1)
+                    {
+                        <!-- Modal -->
+                        <div class="modal fade" id="myModal-@item.ID" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="background-color: red">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    @using (Html.BeginForm("Index", "Category", FormMethod.Post))
+                                    {
+                                        <div class="modal-body">
+                                            <div class="product-img">
+                                                <img src="@item.Image" />
+                                                <div class="gia">@item.Price.ToString("N0") đ</div>
+                                            </div>
+                                            <div class="product-info">
+                                                <div class="product-text">
+                                                    <h1>@item.Name</h1>
+                                                    <p>@item.Description</p>
+                                                    <div class="form-group">
+                                                        <p style="float: left; font-weight: bold">Chọn đế bánh</p> <br />
+                                                        <div style="float: left">
+                                                            <a style="color: #474747; float: left; margin-top: 5px">
+                                                                <input type="radio" id="deday" name="de" value="day" />
+                                                                Đế dày xốp
+                                                            </a><br />
+                                                            <a style="color: #474747; float: left; margin-top: 5px">
+                                                                <input type="radio" id="demong" name="de" value="mong" checked />
+                                                                Đế mỏng giòn
+                                                            </a><br />
+                                                            <a style="color: #474747; float: left; margin-top: 5px">
+                                                                <input type="radio" id="devua" name="de" value="vua" />
+                                                                Đế vừa
+                                                            </a><br />
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <p style="float: left; font-weight: bold">Chọn cỡ bánh</p> <br />
+                                                        <div style="float: left">
+                                                            <br />
+                                                            <a style="color: #474747; float: left; margin-top: 5px">
+                                                                <input type="radio" id="7inch" name="size" value="7" />
+                                                                Cỡ 7 inch
+                                                            </a><br />
+                                                            <a style="color: #474747; float: left; margin-top: 5px">
+                                                                <input type="radio" id="9inch" name="size" value="9" checked />
+                                                                Cỡ 9 inch
+                                                            </a><br />
+                                                            <a style="color: #474747; float: left; margin-top: 5px">
+                                                                <input type="radio" id="12inch" name="size" value="12" />
+                                                                Cỡ 12 inch
+                                                            </a><br />
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <br />
+                                                        <br />
+                                                        <br />
+                                                        <br />
+                                                        <br />
+                                                        <br />
+                                                        <br />
+                                                        <p style="float: left; font-weight: bold">Ghi chú</p> <br />
+                                                        <textarea id="txtContent" class="form-group" placeholder="Nhập ghi chú của bạn tại đây" style="width: 350px; height: 70px; font-size: 15px; padding-left: 10px; padding-right: 10px; color: #474747"></textarea>
+                                                    </div>
+                                                    <ul class="add-to-cart">
+                                                        <li class="add-cart active" style="background-color: #04354c"><a href="/Cart/AddItem?productId=@item.ID&quantity=1" style="background-color:#04354c "><span class="glyphicon glyphicon-shopping-cart"></span> THÊM VÀO GIỎ HÀNG</a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                    <div class="modal-footer">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <!-- Modal -->
+                        <div class="modal fade" id="myModal-@item.ID" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="background-color: red">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="product-img">
+                                            <img src="@item.Image" />
+                                        </div>
+                                        <div class="product-info">
+                                            <div class="product-text">
+                                                <h1>@item.Name</h1>
+                                                <p>@item.Description</p>
+                                                <div class="form-group">
+                                                    <p style="float: left; font-weight: bold">Ghi chú</p> <br />
+                                                    <textarea id="txtContent" class="form-group" placeholder="Nhập ghi chú của bạn tại đây" style="width: 350px; height: 70px; font-size: 15px; padding-left: 10px; padding-right: 10px; color: #474747"></textarea>
+                                                </div>
+                                                <ul class="add-to-cart">
+                                                    <li class="add-cart active" style="background-color: #04354c"><a href="/Cart/AddItem?productId=@item.ID&quantity=1" style="background-color:#04354c "><span class="glyphicon glyphicon-shopping-cart"></span> THÊM VÀO GIỎ HÀNG</a></li>
+                                                </ul>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
                 </div>
             </div>
         }
@@ -37,7 +158,6 @@ else
     }
     <div class="clearfix"></div>
     <div style="padding:6px;"></div>
-
 }
 
 

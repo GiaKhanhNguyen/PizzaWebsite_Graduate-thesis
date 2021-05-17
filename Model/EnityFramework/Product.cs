@@ -33,7 +33,6 @@ namespace Model.EnityFramework
         public decimal Price { get; set; }
 
         public decimal? OriginalPrice { get; set; }
-        public int? DisplayOrder { get; set; }
 
         [StringLength(500)]
         public string Description { get; set; }

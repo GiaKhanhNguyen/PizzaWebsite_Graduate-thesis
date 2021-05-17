@@ -69,6 +69,7 @@ namespace Model.Func
                 user.ModifiedBy = "ADMIN";
                 user.ModifiedDate = DateTime.Now;
                 user.Phone = entity.Phone;
+                user.Gender = entity.Gender;
                 user.Status =  entity.Status;
                 db.SaveChanges();
                 return true;

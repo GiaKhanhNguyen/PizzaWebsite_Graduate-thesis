@@ -71,6 +71,8 @@ namespace FoodShopOnline.Controllers
                     var item = new CartItem();
                     item.Product = subitem.Product;
                     item.Quantity = subitem.OrderDetail.Quantity;
+                    item.Dough = subitem.OrderDetail.Dough;
+                    item.Size = subitem.OrderDetail.Size;
                     list.Add(item);
                     //gắn vào session
                     Session[CommonConstants.CartSession] = list;

@@ -53,8 +53,6 @@ namespace FoodShopOnline.Controllers
                     item.Dough = Session[CommonConstants.DoughKind].ToString(); 
                     item.Size = Session[CommonConstants.SizeProduct].ToString();
                     list.Add(item);
-                    Session[CommonConstants.DoughKind] = null;
-                    Session[CommonConstants.SizeProduct] = null;
                 }
                 //Gán vào session
                 Session[CommonConstants.CartSession] = list;
@@ -69,8 +67,6 @@ namespace FoodShopOnline.Controllers
                 item.Size = Session[CommonConstants.SizeProduct].ToString();
                 var list = new List<CartItem>();
                 list.Add(item);
-                Session[CommonConstants.DoughKind] = null;
-                Session[CommonConstants.SizeProduct] = null;
                 //gắn vào session
                 Session[CommonConstants.CartSession] = list;
             }
@@ -282,6 +278,8 @@ namespace FoodShopOnline.Controllers
                         orderDetail.OrderID = order.ID;
                         orderDetail.Quantity = item.Quantity;
                         orderDetail.Price = item.Product.Price;
+                        orderDetail.Dough = item.Dough;
+                        orderDetail.Size = item.Size;
                         detail.Insert(orderDetail);
 
                         total += (item.Product.Price * item.Quantity);
@@ -360,6 +358,8 @@ namespace FoodShopOnline.Controllers
                         orderDetail.OrderID = orderNoLogin.ID;
                         orderDetail.Quantity = item.Quantity;
                         orderDetail.Price = item.Product.Price;
+                        orderDetail.Dough = item.Dough;
+                        orderDetail.Size = item.Size;
                         detail.InsertOrderNoLogin(orderDetail);
 
                         total += (item.Product.Price * item.Quantity);
@@ -479,6 +479,8 @@ namespace FoodShopOnline.Controllers
                         orderDetail.OrderID = order.ID;
                         orderDetail.Quantity = item.Quantity;
                         orderDetail.Price = item.Product.Price;
+                        orderDetail.Dough = item.Dough;
+                        orderDetail.Size = item.Size;
                         detail.Insert(orderDetail);
 
                         total += (item.Product.Price * item.Quantity);
@@ -589,6 +591,8 @@ namespace FoodShopOnline.Controllers
                         orderDetail.OrderID = orderNoLogin.ID;
                         orderDetail.Quantity = item.Quantity;
                         orderDetail.Price = item.Product.Price;
+                        orderDetail.Dough = item.Dough;
+                        orderDetail.Size = item.Size;
                         detail.InsertOrderNoLogin(orderDetail);
 
                         total += (item.Product.Price * item.Quantity);
@@ -700,23 +704,19 @@ namespace FoodShopOnline.Controllers
             var cart = (List<CartItem>)Session[CommonConstants.CartSession];
             decimal total = 0;
 
-            foreach (var item in cart)
-            {
-                total += (item.Product.Price * item.Quantity);
-            }
             //similar to credit card create itemlist and add item objects to it
             var itemList = new ItemList() { items = new List<Item>() };
             foreach (var item in cart)
             {
-                itemList = new ItemList() { items = new List<Item>() };
                 itemList.items.Add(new Item()
                 {
                     name = item.Product.Name,
                     currency = "USD",
-                    price = "5",
-                    quantity = "1",
+                    price = ((int)item.Product.Price / 23000).ToString(),
+                    quantity = item.Quantity.ToString(),
                     sku = "sku"
                 });
+                total += ((int)item.Product.Price / 23000) * item.Quantity;
             }
 
             var payer = new Payer() { payment_method = "paypal" };
@@ -731,16 +731,16 @@ namespace FoodShopOnline.Controllers
             // similar as we did for credit card, do here and create details object
             var details = new Details()
             {
-                tax = "1",
-                shipping = "1",
-                subtotal = "5"
+                tax = "0",
+                shipping = "0",
+                subtotal = total.ToString()
             };
 
             // similar as we did for credit card, do here and create amount object
             var amount = new Amount()
             {
                 currency = "USD",
-                total = "7", // Total must be equal to sum of shipping, tax and subtotal.
+                total = total.ToString(), // Total must be equal to sum of shipping, tax and subtotal.
                 details = details
             };
 
