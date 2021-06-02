@@ -7,7 +7,7 @@ using System.Web.Mvc;
 
 namespace FoodShopOnline.Areas.Admin.Controllers
 {
-    public class ReportController : Controller
+    public class ReportController : BaseController
     {
         // GET: Admin/Report
         public ActionResult Index()

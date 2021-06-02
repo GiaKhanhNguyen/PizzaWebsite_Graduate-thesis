@@ -15,7 +15,7 @@ namespace Model.Func
     public class OrderDAO
     {
         FoodShopOnlineDBContext db = null;
-        SqlConnection con = new SqlConnection(@"Data Source=.\SQLEXPRESS;" + "Initial Catalog=FoodShopOnline;" + "Integrated Security=True");
+        // SqlConnection con = new SqlConnection(@"Data Source=.\SQLEXPRESS;" + "Initial Catalog=FoodShopOnline;" + "Integrated Security=True");
         public OrderDAO()
         {
             db = new FoodShopOnlineDBContext();
@@ -103,7 +103,7 @@ namespace Model.Func
 
         public List<ReportOrder> ReportOrder()
         {
-            var list = db.Database.SqlQuery<ReportOrder>("SP_ReportOrder").ToList();
+            var list = db.Database.SqlQuery<ReportOrder>("SP_ReportOrder").OrderByDescending(x => x.YearOrder).ToList();
             return list;
         }
         

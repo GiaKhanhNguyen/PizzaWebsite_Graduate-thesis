@@ -12,6 +12,7 @@ namespace Model.ViewModel
         public int DateBenefit { get; set; }
         public int MonthBenefit { get; set; }
         public int YearBenefit { get; set; }
+        public int SumOrder { get; set; }
         public decimal Revenues { get; set; }
         public decimal Benefit { get; set; }
     }

@@ -12,6 +12,7 @@
     var Com = (IEnumerable<Model.EnityFramework.Product>)ViewBag.Com;
     var Salad = (IEnumerable<Model.EnityFramework.Product>)ViewBag.Salad;
     var ThucUong = (IEnumerable<Model.EnityFramework.Product>)ViewBag.ThucUong;
+
 }
 @section jsFooter{
 
@@ -28,6 +29,36 @@
     </script>
     <link href="~/content/client/modal.css" rel="stylesheet" />
     <link href="~/content/client/productcard.css" rel="stylesheet" />
+    <link href="~/content/client/chat.css" rel="stylesheet" />
+    <script type="text/javascript">
+        // When the user scrolls down 20px from the top of the document, show the button
+        window.onscroll = function () { scrollFunction() };
+
+        function scrollFunction() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                document.getElementById("myBtn").style.display = "block";
+            } else {
+                document.getElementById("myBtn").style.display = "none";
+            }
+        }
+
+        // When the user clicks on the button, scroll to the top of the document
+        function topFunction() {
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+        }
+    </script>
+    <script type="text/javascript">
+        $(function () {
+            $("#addClass").click(function () {
+                $('#qnimate').addClass('popup-box-on');
+            });
+
+            $("#removeClass").click(function () {
+                $('#qnimate').removeClass('popup-box-on');
+            });
+        })
+    </script>
 }
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
     <ol class="carousel-indicators">
@@ -657,6 +688,10 @@
         </a>
 
     </p>
+    <div class="gototop">
+        <button onclick="topFunction()" id="myBtn" title="Về đầu trang"> <i class="fas fa-arrow-up"></i></button>
+    </div>
+    @{Html.RenderAction("Chat", "Home");}
     <div class="clearfix"></div>
     <div style="padding:6px;"></div>
 </div>

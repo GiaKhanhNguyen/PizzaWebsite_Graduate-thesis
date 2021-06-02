@@ -1,4 +1,4 @@
-namespace Model.EnityFramework
+﻿namespace Model.EnityFramework
 {
     using System;
     using System.Collections.Generic;

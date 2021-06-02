@@ -32,10 +32,11 @@ namespace FoodShopOnline.Controllers
                     }
                     else
                     {
-                        ModelState.AddModelError("", "Đơn hàng không tồn tại");
+                        // ModelState.AddModelError("", "Đơn hàng không tồn tại");
                         //TempData["AlertMessage"] = "Đơn hàng không tồn tại hihi";
                         //TempData["AlertType"] = "alert-danger";
                         //TempData["CheckOrder"] = "alert('Đơn hàng không tồn tại')";
+                        TempData["CheckOrder"] = "alert('Đơn hàng không tồn tại')";
                     }
                 }
             }

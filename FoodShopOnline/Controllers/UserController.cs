@@ -390,10 +390,17 @@ namespace FoodShopOnline.Controllers
             {
                 if (password.OldPassword == user.Password)
                 {
-                    password.NewPassword = Encryptor.MD5Hash(password.NewPassword);
-                    new UserDAO().ChangePassword(password.NewPassword, session.UserID);
-                    ModelState.AddModelError("", "Đổi mật khẩu thành công");
-                    return Redirect("/thong-tin-tai-khoan");
+                    if(password.NewPassword == password.ConfirmPassword)
+                    {
+                        password.NewPassword = Encryptor.MD5Hash(password.NewPassword);
+                        new UserDAO().ChangePassword(password.NewPassword, session.UserID);
+                        ModelState.AddModelError("", "Đổi mật khẩu thành công");
+                        return Redirect("/thong-tin-tai-khoan");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "Xác nhận mật khẩu không đúng");
+                    }
                 }
                 else
                 {

@@ -77,6 +77,11 @@ namespace FoodShopOnline.Controllers
             var model = new FooterDAO().GetFooter();
             return PartialView(model);
         }
+        [ChildActionOnly]
+        public ActionResult Chat()
+        {
+            return PartialView();
+        }
         public ActionResult Search(string search)
         {
             List<Product> list = new List<Product>();
