@@ -262,5 +262,9 @@ namespace Model.Func
                 return false;
             }
         }
+        public List<User> ListUserChat()
+        {
+            return db.Users.OrderBy(x => x.ID).ToList();
+        }
     }
 }

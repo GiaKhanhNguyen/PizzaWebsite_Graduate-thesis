@@ -8,63 +8,79 @@
 }
 <div class="card shadow mb-4">
     <div class="card-body">
-        <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Phone</th>
-                        <th>Email</th>
-                        <th>Title</th>
-                        <th>Content</th>
-                        <th>Address</th>
-                        <th>DateTime</th>
-                        <th>Status</th>
-                        <th>#</th>
-                    </tr>
-                </thead>
-                <tfoot>
-                    <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Phone</th>
-                        <th>Email</th>
-                        <th>Title</th>
-                        <th>Content</th>
-                        <td>Address</td>
-                        <th>DateTime</th>
-                        <th>Status</th>
-                        <th>#</th>
-                    </tr>
-                </tfoot>
-                <tbody>
-                    @foreach (var item in Model)
-                    {
-                        <tr id="row_@item.ID">
-                            <td>@item.ID</td>
-                            <td>@item.Name</td>
-                            <td>@item.Phone</td>
-                            <td style="height: 10px; width: 50px">@item.Email</td>
-                            <td>@item.Title</td>
-                            <td  style="height: 100px; width: 300px">@item.Content</td>
-                            <td>@item.Address</td>
-                            <td>@item.CreatedDate</td>
-                            <td>@item.Status</td>
-                            <td>
-                                @Ajax.ActionLink("Xóa", "Delete", new { @id = item.ID }, new AjaxOptions
-                           {
-                               Confirm = "Bạn có muốn xóa phản hồi này không?",
-                               OnComplete = "$('#row_" + @item.ID + "').remove()",
-                               HttpMethod = "Delete"
-                           })
-                            </td>
+        @*<div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Phone</th>
+                            <th>Email</th>
+                            <th>Title</th>
+                            <th>Content</th>
+                            <th>Address</th>
+                            <th>DateTime</th>
+                            <th>Status</th>
+                            <th>#</th>
                         </tr>
-                    }
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Name</th>
+                            <th>Phone</th>
+                            <th>Email</th>
+                            <th>Title</th>
+                            <th>Content</th>
+                            <td>Address</td>
+                            <th>DateTime</th>
+                            <th>Status</th>
+                            <th>#</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr id="row_@item.ID">
+                                <td>@item.ID</td>
+                                <td>@item.Name</td>
+                                <td>@item.Phone</td>
+                                <td style="height: 10px; width: 50px">@item.Email</td>
+                                <td>@item.Title</td>
+                                <td  style="height: 100px; width: 300px">@item.Content</td>
+                                <td>@item.Address</td>
+                                <td>@item.CreatedDate</td>
+                                <td>@item.Status</td>
+                                <td>
+                                    @Ajax.ActionLink("Xóa", "Delete", new { @id = item.ID }, new AjaxOptions
+                               {
+                                   Confirm = "Bạn có muốn xóa phản hồi này không?",
+                                   OnComplete = "$('#row_" + @item.ID + "').remove()",
+                                   HttpMethod = "Delete"
+                               })
+                                </td>
+                            </tr>
+                        }
 
-                </tbody>
-            </table>
-        </div>
+                    </tbody>
+                </table>
+            </div>*@
+        <table class="table table-striped">
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <th>@item.Name</th>
+                    <td>@item.Title</td>
+                    <td>@item.Content : @item.CreatedDate</td>
+                    <td>
+                        @Ajax.ActionLink("Xóa", "Delete", new { @id = item.ID }, new AjaxOptions
+                   {
+                       Confirm = "Bạn có muốn xóa phản hồi này không?",
+                       OnComplete = "$('#row_" + @item.ID + "').remove()",
+                       HttpMethod = "Delete"
+                   })
+                    </td>
+                </tr>
+            }
+        </table>
     </div>
 </div>
 

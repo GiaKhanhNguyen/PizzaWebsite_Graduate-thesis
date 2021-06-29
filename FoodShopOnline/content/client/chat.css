@@ -234,16 +234,6 @@ body {
     margin: -9px 0 0 !important;
 }
 
-.popup-messages .direct-chat-img {
-    border: 1px solid #fff;
-    background: #3f9684 none repeat scroll 0 0;
-    border-radius: 50%;
-    float: left;
-    height: 40px;
-    margin: -21px 0 0;
-    width: 40px;
-}
-
 .direct-chat-reply-name {
     color: #fff;
     font-size: 15px;
@@ -271,13 +261,12 @@ body {
     border-right: 2px dotted #fff !important;
     bottom: 0;
     content: "";
-    left: 17px;
+    left: 5px;
     margin: 0;
     position: absolute;
     top: 0;
     width: 2px;
     display: inline;
-    z-index: -2;
 }
 
 .popup-messages .direct-chat-msg::after {
@@ -285,13 +274,13 @@ body {
     border-right: medium none;
     bottom: 0;
     content: "";
-    left: 17px;
+    left: 5px;
     margin: 0;
     position: absolute;
-    top: 0;
+/*    top: 0;
     width: 2px;
     display: inline;
-    z-index: -2;
+    z-index: -2;*/
 }
 
 .direct-chat-text::after, .direct-chat-text::before {

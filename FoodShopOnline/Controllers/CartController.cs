@@ -29,6 +29,8 @@ namespace FoodShopOnline.Controllers
         }
         public ActionResult AddItem(int productId, int quantity)
         {
+            //Session[CommonConstants.DoughKind] = Request.Form["de"].ToString();
+            //Session[CommonConstants.SizeProduct] = Request.Form["size"].ToString();
             var product = new ProductDAO().ViewDetailProduct(productId);
             var cart = Session[CommonConstants.CartSession];
             if (cart != null)

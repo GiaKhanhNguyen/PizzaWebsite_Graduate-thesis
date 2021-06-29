@@ -235,6 +235,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="content\admin\css\chat.css" />
     <Content Include="content\admin\css\sb-admin-2.css" />
     <Content Include="content\admin\css\sb-admin-2.min.css" />
     <Content Include="content\admin\img\nen2.jpg" />
@@ -2870,8 +2871,6 @@
     <Content Include="content\admin\vendor\jquery\jquery.min.js" />
     <Content Include="content\admin\vendor\jquery\jquery.slim.js" />
     <Content Include="content\admin\vendor\jquery\jquery.slim.min.js" />
-    <Content Include="content\app.css" />
-    <Content Include="content\app.js" />
     <Content Include="content\client\bootstrap-social.css" />
     <Content Include="content\client\chat.css" />
     <Content Include="content\client\controller\CartController.js" />
@@ -2885,6 +2884,7 @@
     <Content Include="content\client\controller\paymentController.js" />
     <Content Include="content\client\dndk.css" />
     <Content Include="content\client\dndkv2.css" />
+    <Content Include="content\client\footer.css" />
     <Content Include="content\client\imagecheckbox.css" />
     <Content Include="content\client\images\facebook.png" />
     <Content Include="content\client\images\GiaiKhat\2.png" />

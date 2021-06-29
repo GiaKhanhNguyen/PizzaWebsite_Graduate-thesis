@@ -19,6 +19,7 @@ namespace FoodShopOnline.Controllers
         [HttpGet]
         public ActionResult Index(string de, string size)
         {
+            var session = (UserLogin)Session[CommonConstants.User_Session];
             var model = db.Products.OrderBy(s => s.ID).Take(4);
             // ViewBag.monan = monan;
             ViewBag.Slides = new SlideDAO().ListAllSlide();
@@ -30,8 +31,16 @@ namespace FoodShopOnline.Controllers
             ViewBag.Com = db.Products.OrderByDescending(s => s.ID).Where(x => x.CategoryID == 4).Take(4);
             ViewBag.Salad = db.Products.OrderByDescending(s => s.ID).Where(x => x.CategoryID == 5).Take(4);
             ViewBag.ThucUong = db.Products.OrderByDescending(s => s.ID).Where(x => x.CategoryID == 6).Take(4);
-
-            if(de == "day")
+            ViewBag.Time = DateTime.Now.ToString("hh:mm tt");
+            if(session == null)
+            {
+                ViewBag.CurrentUser = "";
+            }
+            else
+            {
+                ViewBag.CurrentUser = session.UserName;
+            }
+            if (de == "day")
             {
                 Session[CommonConstants.DoughKind] = "Dày xốp";
             }
@@ -93,7 +102,11 @@ namespace FoodShopOnline.Controllers
             }
             return View(list);
         }
-
+        [ChildActionOnly]
+        public ActionResult TopArrow()
+        {
+            return PartialView();
+        }
 
         [HttpPost]
         [AllowAnonymous]

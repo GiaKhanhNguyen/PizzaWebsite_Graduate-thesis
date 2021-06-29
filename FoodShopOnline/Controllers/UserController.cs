@@ -250,7 +250,7 @@ namespace FoodShopOnline.Controllers
                 {
                     var usersession = new UserLogin();
 
-                    usersession.UserName = user.UserName;
+                    usersession.UserName = user.Name;
                     usersession.UserID = user.ID;
 
                     Session.Add(CommonConstants.User_Session, usersession);
