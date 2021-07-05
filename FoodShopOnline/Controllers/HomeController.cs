@@ -31,6 +31,7 @@ namespace FoodShopOnline.Controllers
             ViewBag.Com = db.Products.OrderByDescending(s => s.ID).Where(x => x.CategoryID == 4).Take(4);
             ViewBag.Salad = db.Products.OrderByDescending(s => s.ID).Where(x => x.CategoryID == 5).Take(4);
             ViewBag.ThucUong = db.Products.OrderByDescending(s => s.ID).Where(x => x.CategoryID == 6).Take(4);
+            ViewBag.TrangMieng = db.Products.OrderByDescending(s => s.ID).Where(x => x.CategoryID == 7);
             ViewBag.Time = DateTime.Now.ToString("hh:mm tt");
             if(session == null)
             {

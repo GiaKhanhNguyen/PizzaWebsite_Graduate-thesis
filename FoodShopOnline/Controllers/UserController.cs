@@ -250,7 +250,7 @@ namespace FoodShopOnline.Controllers
                 {
                     var usersession = new UserLogin();
 
-                    usersession.UserName = user.Name;
+                    usersession.UserName = user.UserName;
                     usersession.UserID = user.ID;
 
                     Session.Add(CommonConstants.User_Session, usersession);
@@ -350,6 +350,7 @@ namespace FoodShopOnline.Controllers
                 string imgpath = Server.MapPath((string)session.Avatar);
                 string fileimgpath = imgpath;
                 FileInfo fi = new FileInfo(fileimgpath);
+                model.Avatar = session.Avatar;
                 if (fi.Exists)
                 {
                     fi.Delete();
@@ -359,8 +360,8 @@ namespace FoodShopOnline.Controllers
                     string filename = Path.GetFileName(file.FileName);
                     string filepath = Path.Combine(Server.MapPath("/Data/Avatar/"), filename);
                     file.SaveAs(filepath);
+                    model.Avatar = "/Data/Avatar/" + file.FileName;
                 }
-                model.Avatar = "/Data/Avatar/" + file.FileName;
                 var User = new UserDAO();
                 var result = User.UpdateAccount(model, session.UserID);
                 if (result)
