@@ -126,14 +126,14 @@ namespace FoodShopOnline.Controllers
 
         public void SendEmail(string address, string subject, string body)
         {
-            string email = "nguyenhoanggiakhanh1999@gmail.com";
-            string password = "Giakhanh456";
+            string email = ConfigurationManager.AppSettings["FromEmailAddress"].ToString();
+            string password = ConfigurationManager.AppSettings["FromEmailPassword"].ToString();
 
             var loginInfo = new NetworkCredential(email, password);
             var msg = new MailMessage();
             var smtpClient = new SmtpClient("smtp.gmail.com", 587);
 
-            msg.From = new MailAddress(email);
+            msg.From = new MailAddress(email,"Royal's Pizza");
             msg.To.Add(new MailAddress(address));
             msg.Subject = subject;
             msg.Body = body;
@@ -273,11 +273,6 @@ namespace FoodShopOnline.Controllers
             ConfirmKey bodymail = new ConfirmKey();
             if (user != null)
             {
-
-                //ForgotPassword mail = new ForgotPassword();
-                //string bodymail = mail.BodyMail_LayLaiMatKhau(model.Email, t.Password);
-                //string ThongBao = mail.Send("Lấy lại mật khẩu", bodymail, model.Email, true, true);
-                //ViewBag.ThongBao = ThongBao;
                 string subject = "Mã xác thực tạo mới mật khẩu tài khoản Royal' Pizza";
                 Session["User"] = user;
                 string confirmKey = new Random().Next(100000, 1000000).ToString();

@@ -18,8 +18,8 @@ namespace FoodShopOnline.Models
             StringBuilder mailbody = new StringBuilder();
             mailbody.Append("<html><head><title>Tạo mới mật khẩu</title></head>");
             mailbody.Append("<body>");
-            mailbody.Append("<p>Chào bạn</p>: " + Name);
-            mailbody.Append("<p>Thông tin tài khoản của bạn: </p>");
+            mailbody.Append("<p>Chào bạn: " + Name);
+            mailbody.Append("</p><p>Thông tin tài khoản của bạn: </p>");
             mailbody.Append("<p><b>Tên đăng nhập: </b>" + userName);
             mailbody.Append("</p><p><b>Email: </b>" + Email);
             mailbody.Append("</p><p><b>Mã xác thực tài khoản: </b>" + key);

@@ -78,7 +78,7 @@
                 //$('#discussion').append('<li><strong>' + htmlEncode(name)
                 //    + '</strong>: ' + htmlEncode(message) + '</li>' + '</br>');
                 $('#discussion').append(
-                    '<div class="panel-body msg_container_base">' +
+                    '<div class="panel-body msg_container_base" id=' + htmlEncode('messageBody') + ' > ' +
                     '<div class="row msg_container base_receive">' +
                     '<div class="col-md-2 col-xs-2 avatar">' +
                     '<img style="display: block; width: 100%" src="http://www.bitrebels.com/wp-content/uploads/2011/02/Original-Facebook-Geek-Profile-Avatar-1.jpg" class=" img-responsive ">' +
@@ -113,10 +113,10 @@
             return encodedValue;
         }
         function AutoBottom() {
-            //var messageBody = document.querySelector('#messageBody');
-            //messageBody.scrollTop = messageBody.scrollHeight - messageBody.clientHeight;
-            var messageBody = document.getElementById("messageBody");
-            messageBody.scrollTop = messageBody.scrollHeight;
+            var messageBody = document.querySelector('#messageBody');
+            messageBody.scrollTop = messageBody.scrollHeight - messageBody.clientHeight + 5;
+            //var messageBody = document.getElementById("messageBody");
+            //messageBody.scrollTop = messageBody.scrollHeight;
         }
     </script>
     <script>
