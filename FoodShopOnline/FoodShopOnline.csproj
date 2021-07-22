@@ -3224,6 +3224,9 @@
     <Content Include="Areas\Admin\Views\System\EditSlide.cshtml" />
     <Content Include="Areas\Admin\Views\System\CreateSlide.cshtml" />
     <Content Include="Areas\Admin\Views\Chat\Chat.cshtml" />
+    <Content Include="ClassDiagram7.cd" />
+    <Content Include="ClassDiagram8.cd" />
+    <Content Include="ClassDiagram9.cd" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />

@@ -13,7 +13,7 @@ namespace FoodShopOnline.Areas.Admin.Controllers
     {
         // GET: Admin/User
         [HasCredential(RoleID ="VIEW_USER")]
-        public ActionResult Index(string searchString, int page = 1, int pagesize = 5)
+        public ActionResult Index(string searchString, int page = 1, int pagesize = 10)
         {
             var Func = new UserDAO();
             var model = Func.ListAllPaging(searchString, page, pagesize);

@@ -32,10 +32,6 @@ namespace FoodShopOnline.Controllers
                     }
                     else
                     {
-                        // ModelState.AddModelError("", "Đơn hàng không tồn tại");
-                        //TempData["AlertMessage"] = "Đơn hàng không tồn tại hihi";
-                        //TempData["AlertType"] = "alert-danger";
-                        //TempData["CheckOrder"] = "alert('Đơn hàng không tồn tại')";
                         TempData["CheckOrder"] = "alert('Đơn hàng không tồn tại')";
                     }
                 }
@@ -43,12 +39,27 @@ namespace FoodShopOnline.Controllers
             return Redirect("/kiem-tra-don-hang");
         }
 
+        [HttpGet]
         public ActionResult FollowOrder()
         {
             int id = (int)Session["OrderID"];
             ViewBag.Order = new OrderDAO().GetOrderByID(id);
             var model = new OrderDAO().GetOrderDetailByID(id);
             return View(model);
+        }
+        [HttpPost]
+        public ActionResult FollowOrder(int id)
+        {
+            try
+            {
+                new OrderDAO().DeleteOrder(id);
+                TempData["CheckOrder"] = "alert('Xóa đơn hàng thành công')";
+                return RedirectToAction("CheckOrder", "Order");
+            }
+            catch
+            {
+                return View();
+            }
         }
         [HttpGet]
         public ActionResult OldOrder()
