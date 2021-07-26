@@ -40,6 +40,7 @@ namespace Model.Func
             try
             {
                 model.CreatedDate = DateTime.Now;
+                model.Status = true;
                 db.Products.Add(model);
                 db.SaveChanges();
                 return true;
@@ -66,7 +67,7 @@ namespace Model.Func
                 product.Description = entity.Description;
                 product.ModifiedDate = DateTime.Now;
                 product.ModifiedBy = entity.ModifiedBy;
-                product.Status = entity.Status;
+                //product.Status = entity.Status;
                 db.SaveChanges();
                 return true;
             }
@@ -84,8 +85,11 @@ namespace Model.Func
         //hàm xóa thông tin một sản phẩm
         public void DeleteProduct(int id)
         {
+            //var product = db.Products.Find(id);
+            //db.Products.Remove(product);
+            //db.SaveChanges();
             var product = db.Products.Find(id);
-            db.Products.Remove(product);
+            product.Status = !product.Status;
             db.SaveChanges();
         }
         public bool ChangeStatus(int id)

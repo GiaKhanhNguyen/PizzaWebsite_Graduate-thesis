@@ -29,6 +29,7 @@ namespace Model.Func
             try
             {
                 model.CreatedDate = DateTime.Now;
+                model.Status = true;
                 db.ProductCategories.Add(model);
                 db.SaveChanges();
                 return true;
@@ -52,7 +53,7 @@ namespace Model.Func
                 productCategory.SeoTitile = entity.SeoTitile;
                 productCategory.ModifiedDate = DateTime.Now;
                 productCategory.ModifiedBy = entity.ModifiedBy;
-                productCategory.Status = entity.Status;
+                //productCategory.Status = entity.Status;
                 db.SaveChanges();
                 return true;
             }
@@ -73,8 +74,11 @@ namespace Model.Func
 
         public void Delete(int id)
         {
+            //var productCategory = db.ProductCategories.Find(id);
+            //db.ProductCategories.Remove(productCategory);
+            //db.SaveChanges();
             var productCategory = db.ProductCategories.Find(id);
-            db.ProductCategories.Remove(productCategory);
+            productCategory.Status = !productCategory.Status;
             db.SaveChanges();
         }
     }

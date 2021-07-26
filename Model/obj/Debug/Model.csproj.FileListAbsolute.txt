@@ -182,8 +182,8 @@ D:\Study\Year 4\HKI\TLCN\Project\FoodShopOnline\FoodShopOnline\Model\bin\Debug\S
 D:\Study\Year 4\HKI\TLCN\Project\FoodShopOnline\FoodShopOnline\Model\bin\Debug\System.Numerics.Vectors.xml
 D:\Study\Year 4\HKI\TLCN\Project\FoodShopOnline\FoodShopOnline\Model\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
 D:\Study\Year 4\HKI\TLCN\Project\FoodShopOnline\FoodShopOnline\Model\bin\Debug\System.ValueTuple.xml
-D:\Study\Year 4\HKI\TLCN\Project\FoodShopOnline\FoodShopOnline\Model\obj\Debug\Model.csprojAssemblyReference.cache
 D:\Study\Year 4\HKI\TLCN\Project\FoodShopOnline\FoodShopOnline\Model\obj\Debug\Model.csproj.CoreCompileInputs.cache
 D:\Study\Year 4\HKI\TLCN\Project\FoodShopOnline\FoodShopOnline\Model\obj\Debug\Model.csproj.CopyComplete
 D:\Study\Year 4\HKI\TLCN\Project\FoodShopOnline\FoodShopOnline\Model\obj\Debug\Model.dll
 D:\Study\Year 4\HKI\TLCN\Project\FoodShopOnline\FoodShopOnline\Model\obj\Debug\Model.pdb
+D:\Study\Year 4\HKI\TLCN\Project\FoodShopOnline\FoodShopOnline\Model\obj\Debug\Model.csprojAssemblyReference.cache

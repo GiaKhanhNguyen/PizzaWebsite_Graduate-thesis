@@ -40,11 +40,11 @@ namespace Model.Func
         }
         public List<Order> ListOrderTakeAway()
         {
-            return db.Orders.OrderBy(x => x.ID).Where(y=>y.OrderMethod == "Đặt đến lấy").ToList();
+            return db.Orders.OrderByDescending(x => x.ID).Where(y=>y.OrderMethod == "Đặt đến lấy").ToList();
         }
         public List<Order> ListOrderDelivery()
         {
-            return db.Orders.OrderBy(x => x.ID).Where(y=>y.OrderMethod == "Đặt giao hàng").ToList();
+            return db.Orders.OrderByDescending(x => x.ID).Where(y=>y.OrderMethod == "Đặt giao hàng").ToList();
         }
 
         public List<OrderViewModel> GetOrderDetailByID(int id)

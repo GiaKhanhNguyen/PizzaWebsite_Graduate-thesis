@@ -1,4 +1,5 @@
-﻿using FoodShopOnline.Models;
+﻿using FoodShopOnline.Common;
+using FoodShopOnline.Models;
 using Model.EnityFramework;
 using Model.Func;
 using System;
@@ -16,6 +17,11 @@ namespace FoodShopOnline.Controllers
         public ActionResult Index()
         {
             var model = new ContactDAO().GetActiveContact();
+            var session = (UserLogin)Session[CommonConstants.User_Session];
+            if(session != null)
+            {
+                ViewBag.CurrentUser = new UserDAO().ViewDetailUser(session.UserID);
+            }
             return View(model);
         }
 

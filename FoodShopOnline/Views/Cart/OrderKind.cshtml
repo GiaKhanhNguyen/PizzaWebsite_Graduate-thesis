@@ -9,7 +9,12 @@
 }
 
 @section jsFooter{
-    <script src="~/content/client/controller/paymentController.js"></script>
+    @*<script src="~/content/client/controller/paymentController.js"></script>*@
+    <script type="text/javascript">
+        $('#btnComeback').off('click').on('click', function (e) {
+            window.location.href = "/gio-hang";
+        });
+    </script>
 }
 
 @using (Html.BeginForm("OrderKind", "Cart", FormMethod.Post))
@@ -54,7 +59,7 @@
                         </h2>
                     </center>
                     <div class="form-group" style="margin-left: 750px; margin-top: 40px">
-                        <button id="btnComebackCart" class="btn btn-lg bg-primary" style="font-size: 15px; width: 200px; margin-left: 20px">
+                        <button id="btnComeback" class="btn btn-lg bg-primary" style="font-size: 15px; width: 200px; margin-left: 20px">
                             <i class="fas fa-arrow-left"></i>
                             Quay Lại
                         </button>

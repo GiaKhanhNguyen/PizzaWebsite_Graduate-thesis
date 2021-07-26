@@ -120,6 +120,7 @@
     <Compile Include="Func\SlideDAO.cs" />
     <Compile Include="Func\UserDAO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModel\MenuViewModel.cs" />
     <Compile Include="ViewModel\OldOrderViewModel.cs" />
     <Compile Include="ViewModel\OrderViewModel.cs" />
     <Compile Include="ViewModel\ReportBenefit.cs" />

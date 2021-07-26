@@ -29,7 +29,7 @@
 <div class="pizza">
     <br />
     <p>@category.Name</p>
-    @using (Html.BeginForm("Index", "Category", FormMethod.Get))
+    @*@using (Html.BeginForm("Index", "Category", FormMethod.Get))
     {
 
         <select name="sort" id="sort">
@@ -39,7 +39,7 @@
         </select>
         <button type="submit"><i class="fas fa-search fa-2x"></i></button>
 
-    }
+    }*@
     <hr>
     @foreach (var item in Model)
     {

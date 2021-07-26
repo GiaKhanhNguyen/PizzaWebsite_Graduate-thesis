@@ -16,9 +16,12 @@ namespace Model.Func
         }
         public List<Slide> ListAllSlide()
         {
+            return db.Slides.OrderBy(x => x.DisplayOrder).Where(k => k.Status == true).ToList();
+        }
+        public List<Slide> ListSlide()
+        {
             return db.Slides.OrderBy(x => x.DisplayOrder).ToList();
         }
-
         public bool EditSlide(Slide entity)
         {
 

@@ -85,7 +85,7 @@ namespace Model.Func
             try
             {
                 var user = db.Users.Find(id);
-                db.Users.Remove(user);
+                user.DeleteStatus = !user.DeleteStatus;
                 db.SaveChanges();
                 return true;
             }
@@ -117,11 +117,54 @@ namespace Model.Func
             {
                 if(IsLoginAdmin == true)
                 {
-                    if((result.GroupID == CommonConstant.ADMIN_GROUP) || (result.GroupID == CommonConstant.MOD_GROUP))
+                    if(result.DeleteStatus == true)
+                    {
+                        if ((result.GroupID == CommonConstant.ADMIN_GROUP) || (result.GroupID == CommonConstant.MOD_GROUP))
+                        {
+                            if (result.Status == false)
+                            {
+                                return -1; //tài khoản đang bị khóa
+                            }
+                            else
+                            {
+                                if (result.Password == passWord)
+                                {
+                                    return 1; //đăng nhập thành công
+                                }
+                                else
+                                {
+                                    return -2; //nhập sai password
+                                }
+                            }
+                        }
+                        else
+                        {
+                            return -3;  //tài khoản không có quyền đăng nhập
+                        }
+                    }
+                    else
+                    {
+                        return 0; // tài khoản không tồn tại
+                    }
+                }
+                else
+                {
+                    if(result.DeleteStatus == true)
                     {
                         if (result.Status == false)
                         {
                             return -1; //tài khoản đang bị khóa
+                        }
+                        else if ((result.GroupID == CommonConstant.ADMIN_GROUP))
+                        {
+                            if (result.Password == passWord)
+                            {
+                                return 1; //đăng nhập thành công
+                            }
+                            else
+                            {
+                                return -2; //nhập sai password
+                            }
                         }
                         else
                         {
@@ -137,36 +180,7 @@ namespace Model.Func
                     }
                     else
                     {
-                        return -3;  //tài khoản không có quyền đăng nhập
-                    }
-                }
-                else
-                {
-                    if (result.Status == false)
-                    {
-                        return -1; //tài khoản đang bị khóa
-                    }
-                    else if((result.GroupID == CommonConstant.ADMIN_GROUP))
-                    {
-                        if (result.Password == passWord)
-                        {
-                            return 1; //đăng nhập thành công
-                        }
-                        else
-                        {
-                            return -2; //nhập sai password
-                        }
-                    }
-                    else
-                    {
-                        if (result.Password == passWord)
-                        {
-                            return 1; //đăng nhập thành công
-                        }
-                        else
-                        {
-                            return -2; //nhập sai password
-                        }
+                        return 0; //tài khoản không tồn tại
                     }
                 }
             }
@@ -211,12 +225,12 @@ namespace Model.Func
         {
             return db.Users.Count(x => x.Email == email) > 0;
         }
-        //hiển thị dữ liệu nhóm người dùng sử dụng Store Procedure
-        public List<UserGroup> ListUserGroup()
-        {
-            var list = db.Database.SqlQuery<UserGroup>("SP_UserGroup").ToList();
-            return list;
-        }
+        ////hiển thị dữ liệu nhóm người dùng sử dụng Store Procedure
+        //public List<UserGroup> ListUserGroup()
+        //{
+        //    var list = db.Database.SqlQuery<UserGroup>("SP_UserGroup").ToList();
+        //    return list;
+        //}
 
         public void NewPassword(User enity)
         {

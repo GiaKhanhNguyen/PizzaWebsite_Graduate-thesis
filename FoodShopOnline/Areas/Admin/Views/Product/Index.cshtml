@@ -29,7 +29,7 @@
         }
 
         <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" style="color: black">
                 <thead>
                     <tr>
                         <th>TenSP</th>
@@ -38,7 +38,6 @@
                         <th>Gia</th>
                         <th>GiaGoc</th>
                         <th>ThanhPhan</th>
-                        <th>TrangThai</th>
                         <th>#</th>
                     </tr>
                 </thead>
@@ -50,32 +49,35 @@
                         <th>Gia</th>
                         <th>GiaGoc</th>
                         <th>ThanhPhan</th>
-                        <th>TrangThai</th>
                         <th>#</th>
                     </tr>
                 </tfoot>
                 <tbody>
                     @foreach (var item in Model)
                     {
-                        <tr id="row_@item.ID">
-                            <td>@item.Name</td>
-                            <td><img src="@item.Image" style="width: 70px; height: 70px" /></td>
-                            <td>@item.CategoryID</td>
-                            <td>@item.Price</td>
-                            <td>@item.OriginalPrice</td>
-                            <td>@item.Description</td>
-                            <td><a href="#" class="btn-active-product" data-id="@item.ID">@(item.Status ? "Kích hoạt" : "Khóa")</a></td>
-                            <td style="width: 100px">
-                                <a href="~/Admin/Product/Edit/@item.ID">Sửa</a>
-                                |
-                                @Ajax.ActionLink("Xóa", "Delete", new { @id = item.ID }, new AjaxOptions
-                           {
-                               Confirm = "Bạn có muốn xóa sản phẩm này không?",
-                               OnComplete = "$('#row_" + @item.ID + "').remove()",
-                               HttpMethod = "Delete"
-                           })
-                            </td>
-                        </tr>
+                        if (item.Status == true)
+                        {
+                            <tr id="row_@item.ID">
+                                <td>@item.Name</td>
+                                <td><img src="@item.Image" style="width: 70px; height: 70px" /></td>
+                                <td>@item.CategoryID</td>
+                                <td>@item.Price</td>
+                                <td>@item.OriginalPrice</td>
+                                <td>@item.Description</td>
+                                @*<td><a href="#" class="btn-active-product" data-id="@item.ID">@(item.Status ? "Kích hoạt" : "Khóa")</a></td>*@
+                                <td style="width: 100px">
+                                    <a href="~/Admin/Product/Edit/@item.ID">Sửa</a>
+                                    |
+                                    @Ajax.ActionLink("Xóa", "Delete", new { @id = item.ID }, new AjaxOptions
+                               {
+                                   Confirm = "Bạn có muốn xóa sản phẩm này không?",
+                                   OnComplete = "$('#row_" + @item.ID + "').remove()",
+                                   HttpMethod = "Delete"
+                               })
+                                </td>
+                            </tr>
+                        }
+
                     }
                 </tbody>
             </table>

@@ -1,8 +1,12 @@
 ﻿@model Model.EnityFramework.Contact
-
+@using FoodShopOnline.Common;
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    var session = (UserLogin)Session[FoodShopOnline.Common.CommonConstants.User_Session];
 }
 
 @section jsFooter{
@@ -17,32 +21,62 @@
                     <div class="col-md-12">
                         <div class="col-md-6">
                             <p style="margin-left: 110px; font-family: 'Times New Roman', Times, serif">Liên hệ với chúng tôi</p>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="fa fa-user" style="font-size: 15px; margin-right: 30px"> Họ Và Tên*</label>
-                                    <input id="txtName" type="text" placeholder="Nhập tên của bạn..." class="form-group" style="font-size: 15px; width: 230px" />
+                            @if (session != null)
+                            {
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="fa fa-user" style="font-size: 15px; margin-right: 30px"> Họ Và Tên*</label>
+                                        <input id="txtName" type="text" class="form-group" style="font-size: 15px; width: 230px" value="@ViewBag.CurrentUser.Name" placeholder="Nhập tên của bạn..."/>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label style="font-size: 15px; margin-right: 45px" class="fas fa-home"> Địa Chỉ*</label>
-                                    <input id="txtAddress" type="text" placeholder="Nhập địa chỉ..." class="form-group" style="font-size: 15px; width: 230px" />
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label style="font-size: 15px; margin-right: 45px" class="fas fa-home"> Địa Chỉ*</label>
+                                        <input id="txtAddress" type="text" class="form-group" style="font-size: 15px; width: 230px" value="@ViewBag.CurrentUser.Address" placeholder="Nhập địa chỉ..."/>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label style="font-size: 15px; margin-right: 55px" class="fas fa-envelope"> Email*</label>
-                                    <input id="txtEmail" type="text" placeholder="Nhập địa chỉ email của bạn..." class="form-group" style="font-size: 15px; width: 230px" />
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label style="font-size: 15px; margin-right: 55px" class="fas fa-envelope"> Email*</label>
+                                        <input id="txtEmail" type="text" class="form-group" style="font-size: 15px; width: 230px" value="@ViewBag.CurrentUser.Email" placeholder="Nhập địa chỉ email của bạn..."/>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label style="font-size: 15px; margin-right: 26px" class="fas fa-phone"> Điện thoại*</label>
-                                    <input id="txtPhone" type="text" placeholder="Nhập số điện thoại..." class="form-group" style="font-size: 15px; width: 230px" />
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label style="font-size: 15px; margin-right: 26px" class="fas fa-phone"> Điện thoại*</label>
+                                        <input id="txtPhone" type="text" class="form-group" style="font-size: 15px; width: 230px" value="@ViewBag.CurrentUser.Phone" placeholder="Nhập số điện thoại..."/>
+                                    </div>
                                 </div>
-                            </div>
+                            }
+                            else
+                            {
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="fa fa-user" style="font-size: 15px; margin-right: 30px"> Họ Và Tên*</label>
+                                        <input id="txtName" type="text" placeholder="Nhập tên của bạn..." class="form-group" style="font-size: 15px; width: 230px" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label style="font-size: 15px; margin-right: 45px" class="fas fa-home"> Địa Chỉ*</label>
+                                        <input id="txtAddress" type="text" placeholder="Nhập địa chỉ..." class="form-group" style="font-size: 15px; width: 230px" />
+                                    </div>
+                                </div>
 
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label style="font-size: 15px; margin-right: 55px" class="fas fa-envelope"> Email*</label>
+                                        <input id="txtEmail" type="text" placeholder="Nhập địa chỉ email của bạn..." class="form-group" style="font-size: 15px; width: 230px" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label style="font-size: 15px; margin-right: 26px" class="fas fa-phone"> Điện thoại*</label>
+                                        <input id="txtPhone" type="text" placeholder="Nhập số điện thoại..." class="form-group" style="font-size: 15px; width: 230px" />
+                                    </div>
+                                </div>
+                            }
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label style="font-size: 15px; margin-right: 26px" class="fas fa-file-archive"> Tiêu Đề*</label>

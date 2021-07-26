@@ -20,18 +20,18 @@ namespace FoodShopOnline.Controllers
         public ActionResult Index(string de, string size)
         {
             var session = (UserLogin)Session[CommonConstants.User_Session];
-            var model = db.Products.OrderBy(s => s.ID).Take(4);
+            var model = db.Products.OrderBy(s => s.ID).Where(x=>x.Status == true).Take(4);
             // ViewBag.monan = monan;
             ViewBag.Slides = new SlideDAO().ListAllSlide();
             ViewBag.category = new ProductCategoryDAO().ListAllProCate();
-            ViewBag.KM = db.Products.Where(x => x.CategoryID == 8).OrderBy(y => y.ID).ToList();
             ViewBag.SP = db.Products.OrderBy(k => k.ID).ToList();
-            ViewBag.KhaiVi = db.Products.OrderByDescending(s => s.ID).Where(x=>x.CategoryID == 2).Take(4);
-            ViewBag.MyY = db.Products.OrderByDescending(s => s.ID).Where(x => x.CategoryID == 3).Take(4);
-            ViewBag.Com = db.Products.OrderByDescending(s => s.ID).Where(x => x.CategoryID == 4).Take(4);
-            ViewBag.Salad = db.Products.OrderByDescending(s => s.ID).Where(x => x.CategoryID == 5).Take(4);
-            ViewBag.ThucUong = db.Products.OrderByDescending(s => s.ID).Where(x => x.CategoryID == 6).Take(4);
-            ViewBag.TrangMieng = db.Products.OrderByDescending(s => s.ID).Where(x => x.CategoryID == 7);
+            ViewBag.KhaiVi = db.Products.OrderBy(s => s.ID).Where(x=>x.CategoryID == 2).Where(k=>k.Status == true).Take(4);
+            ViewBag.MyY = db.Products.OrderBy(s => s.ID).Where(x => x.CategoryID == 3).Where(k => k.Status == true).Take(4);
+            ViewBag.Com = db.Products.OrderBy(s => s.ID).Where(x => x.CategoryID == 4).Where(k => k.Status == true).Take(4);
+            ViewBag.Salad = db.Products.OrderBy(s => s.ID).Where(x => x.CategoryID == 5).Where(k => k.Status == true).Take(4);
+            ViewBag.ThucUong = db.Products.OrderBy(s => s.ID).Where(x => x.CategoryID == 6).Where(k => k.Status == true).Take(4);
+            ViewBag.TrangMieng = db.Products.OrderBy(s => s.ID).Where(x => x.CategoryID == 7);
+            ViewBag.KM = db.Products.Where(x => x.CategoryID == 8).OrderBy(y => y.ID).ToList();
             ViewBag.Time = DateTime.Now.ToString("hh:mm tt");
             if(session == null)
             {

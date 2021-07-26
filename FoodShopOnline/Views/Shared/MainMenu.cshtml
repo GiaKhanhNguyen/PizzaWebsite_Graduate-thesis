@@ -2,7 +2,10 @@
 <div>
     @foreach (var item in Model)
     {
-        <a href="@item.URL" target="@item.Target"><i class="@item.Icon"></i> @item.Name</a>
+        if (item.Status == true)
+        {
+            <a href="@item.URL" target="@item.Target"><i class="@item.Icon"></i> @item.Name</a>
+        }
     }
     @*
         <a href="/Menu/KhuyenMai"><i class="fas fa-bullhorn"></i> Khuyến Mãi</a>

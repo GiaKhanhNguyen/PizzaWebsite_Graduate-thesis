@@ -124,6 +124,11 @@ namespace FoodShopOnline
                 defaults: new { controller = "Contact", action = "Index", id = UrlParameter.Optional }, namespaces: new[] { "FoodShopOnline.Controllers" }
                 );
             routes.MapRoute(
+                name: "Cua Hang",
+                url: "cua-hang",
+                defaults: new { controller = "Menu", action = "CuaHang", id = UrlParameter.Optional }, namespaces: new[] { "FoodShopOnline.Controllers" }
+                );
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }, namespaces: new[] { "FoodShopOnline.Controllers" }

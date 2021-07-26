@@ -23,9 +23,42 @@ namespace FoodShopOnline.Areas.Admin.Controllers
             return View(model);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken] //Khi form Admin được Post hiển thị lên
+        public ActionResult EditMenu(Menu menu)
+        {
+            if (ModelState.IsValid)
+            {
+                var Func = new MenuDAO();
+                var result = Func.EditMenu(menu);
+                if (result)
+                {
+                    SetAlert("Cập nhật thông tin thành công", "success");
+                    return RedirectToAction("Menu", "System");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Cập nhật thông tin thất bại");
+                }
+            }
+            return View("Menu");
+        }
+        public ActionResult EditMenu(int id)
+        {
+            var slide = new MenuDAO().ViewDetailMenu(id);
+            return View(slide);
+        }
+
+        public ActionResult DeleteMenu(int id)
+        {
+            new MenuDAO().DeleteMenu(id);
+            return RedirectToAction("Menu", "System");
+        }
+
+
         public ActionResult Slide()
         {
-            var model = new SlideDAO().ListAllSlide();
+            var model = new SlideDAO().ListSlide();
             return View(model);
         }
         [HttpGet]
@@ -57,7 +90,6 @@ namespace FoodShopOnline.Areas.Admin.Controllers
                 return View();
             }
         }
-
         //hàm sửa slide
         [HttpPost]
         [ValidateAntiForgeryToken] //Khi form Admin được Post hiển thị lên

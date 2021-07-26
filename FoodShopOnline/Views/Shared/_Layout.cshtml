@@ -68,18 +68,84 @@
     <main>
         @RenderBody()
     </main>
-    <footer>
-        @*@{ Html.RenderAction("Footer", "Home");}*@
+    @*@{ Html.RenderAction("Footer", "Home");}*@
 
 
 
+    <!--<div class="wordfoot">
+    <p class="alignleft"><i class="far fa-copyright"></i> 2021 ROYAL's PIZZA VIETNAM | PRIVACY POLICY </p>-->
+    @*<hr style="width: 1px; height:100px"; color="#FFF" />*@
+    <!--<p class="alignright">HOTLINE: 1900 9999 &nbsp; <img src="\content\client\images\logo\master.png"> &nbsp; <img src="\content\client\images\logo\bct.png"> </p>-->
+    @*<div class="row">
+            <div class="col-md-5">
+                <a class="alignright" href="#">Cam kết</a> <br />
+                <a class="alignright" href="#">lịch sử</a> <br />
+                <a class="alignright" href="#">Khuyến mãi</a> <br />
+            </div>
+            <div class="col-md-4">
+                <a class="alignright" href="#">Thực đơn</a>
+                <a class="alignright" href="#">Theo dõi đơn hàng</a>
+                <a class="alignright" href="#">Danh sách cửa hàng</a>
+            </div>
+        </div>*@
+    <!--</div>-->
+    <footer class="mainfooter" role="contentinfo">
         <div class="wordfoot">
-            <p class="alignleft"><i class="far fa-copyright"></i> 2021 ROYAL's PIZZA VIETNAM | PRIVACY POLICY </p>
-            @*<hr style="width: 1px; height:100px"; color="#FFF" />*@
-            <p class="alignright">HOTLINE: 1900 9999 &nbsp; <img src="\content\client\images\logo\master.png"> &nbsp; <img src="\content\client\images\logo\bct.png"> </p>
+            <div class="footer-middle">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-1 col-sm-4">
+                            <!--Column1-->
+                            <div class="footer-pad">
+                                <img src="\content\client\images\logo\logo.png">
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-4">
+                            <!--Column1-->
+                            <div class="footer-pad">
+                                <p class="alignleft" style="font-size: 30px; font-weight: bold">Royal's Pizza </p>
+                                <p class="alignleft" style="font-style: italic">HOTLINE ĐẶT HÀNG: 1900 9999 </p>
+                            </div>
+                        </div>
+                        <div class="col-md-2 col-sm-4">
+                            <!--Column1-->
+                            <div class="footer-pad">
+                                <a href="#">Cam kết</a><br />
+                                <a href="#">Lịch sử</a><br />
+                                <a href="#">Tuyển dụng</a><br />
+                                <a href="#">Tin tức</a><br />
+                            </div>
+                        </div>
+                        <div class="col-md-2 col-sm-4">
+                            <!--Column1-->
+                            <div class="footer-pad">
+                                <a href="/">Thực đơn</a><br />
+                                <a href="/chuong-trinh-khuyen-mai">Khuyến mãi</a><br />
+                                <a href="/kiem-tra-don-hang">Theo dõi đơn hàng</a> <br />
+                                <a href="/cua-hang">Hệ thống cửa hàng</a><br />
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <ul class="social-network social-circle">
+                                <li><img src="\content\client\images\logo\master.png"> &nbsp; <img src="\content\client\images\logo\bct.png"></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <br />
+
+                    <div class="row">
+                        <div class="col-md-12 copy">
+                            <p class="text-center">&copy; 2021 ROYAL's PIZZA VIETNAM | PRIVACY POLICY</p>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
         </div>
         <div style="clear: both;"></div>
     </footer>
+
     @RenderSection("jsFooter", required: false)
 </body>
 </html>

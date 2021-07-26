@@ -1,4 +1,4 @@
-body{
+﻿body{
     background-image: url("images/Page_KM/nen2.jpg")
 }
 .vitri{
@@ -33,11 +33,7 @@ header{
     color: red;
     text-decoration: none;
 }
-footer{    
-    background-color: #04354c;
-    height: -10px;
-    width: 100%;
-}
+
 main{
     padding-top: 11%;
     padding-bottom: 1%;
@@ -254,10 +250,17 @@ p2{
 .wordfoot p{
     color: white;
     font-family:  'Montserrat', sans-serif;
-    font-size: 23px;
-    padding: 2.5ex;
+    font-size: 15px;
+    padding: 1ex;
     font-weight: 100;
 
+}
+.wordfoot a {
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    font-weight: 100;
+    padding-top: 3ex
 }
 
 .alignleft {
@@ -472,4 +475,115 @@ font-size: 25px;
 }
 .cuahang p{
     text-align: left;
+}
+footer {
+    background-color: #04354c;
+    height: -10px;
+    width: 100%;
+}
+
+footer a {
+    color: white;
+    font-size: 12px;
+    transition-duration: 0.2s;
+    font-family: 'Montserrat', sans-serif;
+}
+
+    footer a:hover {
+        color: red;
+        text-decoration: none;
+    }
+
+.copy {
+    font-size: 8px;
+    padding: 2px;
+    border-top: 1px solid #FFFFFF;
+}
+
+.footer-middle {
+    padding-top: 2em;
+    color: white;
+}
+
+
+/*SOCİAL İCONS*/
+
+/* footer social icons */
+
+ul.social-network {
+    list-style: none;
+    display: inline;
+    margin-left: 0 !important;
+    padding: 0;
+}
+
+    ul.social-network li {
+        display: inline;
+        margin: 0 5px;
+    }
+
+
+/* footer social icons */
+
+.social-network a.icoFacebook:hover {
+    background-color: #3B5998;
+}
+
+.social-network a.icoLinkedin:hover {
+    background-color: #007bb7;
+}
+
+    .social-network a.icoFacebook:hover i,
+    .social-network a.icoLinkedin:hover i {
+        color: #fff;
+    }
+
+.social-network a.socialIcon:hover,
+.socialHoverClass {
+    color: #44BCDD;
+}
+
+.social-circle li a {
+    display: inline-block;
+    position: relative;
+    margin: 0 auto 0 auto;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    text-align: center;
+    width: 30px;
+    height: 30px;
+    font-size: 15px;
+}
+
+.social-circle li i {
+    margin: 0;
+    line-height: 30px;
+    text-align: center;
+}
+
+.social-circle li a:hover i,
+.triggeredHover {
+    -moz-transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -ms--transform: rotate(360deg);
+    transform: rotate(360deg);
+    -webkit-transition: all 0.2s;
+    -moz-transition: all 0.2s;
+    -o-transition: all 0.2s;
+    -ms-transition: all 0.2s;
+    transition: all 0.2s;
+}
+
+.social-circle i {
+    color: #04354c;
+    -webkit-transition: all 0.8s;
+    -moz-transition: all 0.8s;
+    -o-transition: all 0.8s;
+    -ms-transition: all 0.8s;
+    transition: all 0.8s;
+}
+
+.social-network a {
+    background-color: #04354c;
 }

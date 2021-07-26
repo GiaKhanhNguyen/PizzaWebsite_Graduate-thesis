@@ -12,6 +12,7 @@ namespace Model.EnityFramework
         public int ID { get; set; }
 
         [StringLength(250)]
+        [Display(Name ="TenChucNang")]
         public string Name { get; set; }
 
         [StringLength(500)]
@@ -20,6 +21,7 @@ namespace Model.EnityFramework
         [StringLength(50)]
         public string Icon { get; set; }
 
+        [Display(Name ="ThuTuHienThi")]
         public int? DisplayOrder { get; set; }
 
         public int? GroupID { get; set; }

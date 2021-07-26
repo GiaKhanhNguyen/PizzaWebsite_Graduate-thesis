@@ -40,6 +40,7 @@ namespace FoodShopOnline.Areas.Admin.Controllers
                     user.Password = EncryptedMd5Pass;
                     user.CreatedDate = DateTime.Now;
                     user.CreatedBy = "ADMIN";
+                    user.Avatar = "/Data/Avatar/user.png";
                     int id = Func.insert(user);
                     if (id != 0)
                     {
@@ -98,24 +99,10 @@ namespace FoodShopOnline.Areas.Admin.Controllers
         [HasCredential(RoleID = "DELETE_USER")]
         public ActionResult Delete(int id)
         {
-            var deluser = new UserDAO().Delete(id);
+            new UserDAO().Delete(id);
             return RedirectToAction("Index");
-            //if (deluser)
-            //{
-            //    SetAlert("Xóa thành công", "success");
-                
-            //}
-            //else
-            //{
-            //    ModelState.AddModelError("", "Xóa User không Thành công. Không được xóa Admin. Tải lại trang để cập nhật lại trang User");
-            //}
-            //return View("DeleteError");
-            //return Redirect("DeleteError");
         }
-        //
 
-        //
-        
         [HasCredential(RoleID = "EDIT_USER")]
         [HttpPost]
         public JsonResult ChangeStatus(int id)
@@ -127,13 +114,13 @@ namespace FoodShopOnline.Areas.Admin.Controllers
             });
         }
         //Trang hiển thị nhóm người dùng
-        [HttpGet]
-        public ActionResult UserGroup()
-        {
-            var list = new UserDAO();
-            var model = list.ListUserGroup();
-            return View(model);
-        }
+        //[HttpGet]
+        //public ActionResult UserGroup()
+        //{
+        //    var list = new UserDAO();
+        //    var model = list.ListUserGroup();
+        //    return View(model);
+        //}
 
         [HttpGet]
         public ActionResult Account()

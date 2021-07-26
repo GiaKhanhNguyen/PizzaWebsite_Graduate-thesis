@@ -60,16 +60,17 @@ namespace FoodShopOnline.Controllers
                     user.UserName = model.UserName;
                     user.Password = Encryptor.MD5Hash(model.Password);
                     user.GroupID = "MEMBER";
-                    user.Phone = "01234567890";
+                    user.Phone = "";
                     user.CreatedBy = "CUSTOMER";
                     user.ModifiedBy = "CUSTOMER";
                     user.ModifiedDate = DateTime.Now;
                     user.Name = model.Name;
-                    user.Avatar = "/content/client/images/user.png";
+                    user.Avatar = "/Data/Avatar/user.png";
                     user.Address = model.Address;
                     user.Email = model.Email;
                     user.CreatedDate = DateTime.Now;
                     user.Status = true;
+                    user.DeleteStatus = true;
 
                     if (ModelState.IsValid)
                     {

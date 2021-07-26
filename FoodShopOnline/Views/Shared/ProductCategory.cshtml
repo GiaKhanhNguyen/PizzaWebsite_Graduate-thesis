@@ -4,7 +4,10 @@
 @foreach (var item in Model)
 {
     @*<a class="dropdown-item" href="@item.SeoTitile-@item.ID"><i class="@item.Icon"></i> @item.Name</a>*@
-    <a class="dropdown-item" href="/san-pham/@item.Alias-@item.ID"><i class="@item.Icon"></i> @item.Name</a>
+    if (item.Status == true)
+    {
+        <a class="dropdown-item" href="/san-pham/@item.Alias-@item.ID"><i class="@item.Icon"></i> @item.Name</a>
+    }
 }
 
 @*<a class="dropdown-item" href="/Category/MonAnKem1_Category"><i class="fa fa-fw fa-utensils"></i> Món Ăn Kèm</a>

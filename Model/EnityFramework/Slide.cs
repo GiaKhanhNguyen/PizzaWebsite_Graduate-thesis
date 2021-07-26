@@ -41,6 +41,6 @@ namespace Model.EnityFramework
         public string ModifiedBy { get; set; }
 
         [Display(Name = "TrangThai")]
-        public bool? Status { get; set; }
+        public bool Status { get; set; }
     }
 }

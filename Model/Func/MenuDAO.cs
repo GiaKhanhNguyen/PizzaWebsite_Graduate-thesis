@@ -1,4 +1,5 @@
 ﻿using Model.EnityFramework;
+using Model.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,9 +25,49 @@ namespace Model.Func
             return db.MenuGroups.OrderBy(x => x.ID).ToList();
         }
 
-        public List<Menu> ListMenu()
+        //public List<Menu> ListMenu()
+        //{
+        //    return db.Menus.OrderBy(x => x.ID).ToList();
+        //}
+        public List<MenuViewModel> ListMenu()
         {
-            return db.Menus.OrderBy(x => x.ID).ToList();
+            var data = (from a in db.Menus
+                        join b in db.MenuGroups on a.GroupID equals b.ID
+                        select new MenuViewModel()
+                        {
+                            Menu = a,
+                            MenuGroup = b
+                        });
+            return data.OrderBy(x=>x.Menu.ID).ToList();
         }
+
+        public bool EditMenu(Menu entity)
+        {
+            try
+            {
+                var menu = db.Menus.Find(entity.ID);
+                menu.Name = entity.Name;
+                menu.URL = entity.URL;
+                menu.Icon = entity.Icon;
+                menu.DisplayOrder = entity.DisplayOrder;
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+        public Menu ViewDetailMenu(int id)
+        {
+            return db.Menus.Find(id);
+        }
+        public void DeleteMenu(int id)
+        {
+            var menu = db.Menus.Find(id);
+            menu.Status = !menu.Status;
+            db.SaveChanges();
+        }
+
     }
 }
